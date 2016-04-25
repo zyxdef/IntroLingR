@@ -399,13 +399,19 @@ AQUI!!!  Um slide para cada um desses
 ## Programação em R
 ### Operações de Comparação
 
+**AQUI!!!**
+
 ## Programação em R
 ### Operações Lógicas
+
+**AQUI!!!**
 
 ## Programação em R
 ### Executando Funções Existentes
 
+**AQUI!!!**
+
 ## Programação em R
 ### Criando as suas Próprias Funções
 
-
+**AQUI!!!**
