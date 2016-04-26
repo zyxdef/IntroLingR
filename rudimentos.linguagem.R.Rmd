@@ -8,7 +8,7 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## O que veremos nesse curso
+## O que veremos
 
 1. Tipos e estruturas de dados em R 
     1. Tipos de dados
