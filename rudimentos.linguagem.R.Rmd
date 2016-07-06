@@ -8,6 +8,15 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+
+
+## O que veremos
+
+1. Tipos e estruturas de dados em R 
+2. Programação em R
+
+
+
 ## O que veremos
 
 1. Tipos e estruturas de dados em R 
@@ -16,21 +25,50 @@ knitr::opts_chunk$set(echo = FALSE)
     3. Atributos
     4. “Não-dados”
 2. Programação em R
-    1. Operador de atribuição
-    2. Operadores de extração (*subscripting*) 
+
+
+
+## O que veremos
+
+1. Tipos e estruturas de dados em R 
+2. Programação em R
+    1. *Scripts*
+    1. Comentários
+    1. Funções
+    1. Operadores de atribuição
+    2. Operadores de indexação
+    2. Operações e funções matemáticas
+    2. Operações e funções de comparação
+    2. Operações e funções lógicas
     3. Instruções de repetições
     4. Instruções de execução condicional
-    5. Funções e operações 
+
+
+
+
 
 # Tipos e Estruturas de Dados em R 
+
+
+
+
+
+# Tipos de Dados
+
+
+
 ## Tipos de Dados
+
 1. quantitativo (`numeric()`), 
 2. textual (`character()`), 
 3. lógico (`logical()`), 
 4. categórico (`factor()` e `ordered()`)
 5. outros
 
+
+
 ## Tipos de Dados
+
 ### Quantitativo
 
 O R consegue lidar números
@@ -44,7 +82,10 @@ O R consegue lidar números
 
 Valores numéricos são *double* por padrão, a menos que explicitado outro tipo.
 
+
+
 ## Tipos de Dados
+
 ###Textual
 
 O R consegue lidar com informações textuais
@@ -55,8 +96,12 @@ O R consegue lidar com informações textuais
 paste("Nós somos", "dois textos.")
 ```
 
+
+
 ## Tipos de Dados
+
 ###Lógico
+
 O R consegue lidar com valores lógicos: 
 
 - verdadeiro (`TRUE` ou `T`) 
@@ -68,7 +113,10 @@ x <- (2 < 3)
 x
 ```
 
+
+
 ## Tipos de Dados
+
 ### Categórico 
 
 O R consegue lidar com dados qualitativos 
@@ -82,7 +130,10 @@ Eles têm metainformação, que os dados textuais não têm.
 
         Fatores = Dados + Metadados
 
+
+
 ## Tipos de Dados
+
 ### Categórico 
 
 ```{r}
@@ -90,7 +141,10 @@ c("criança", "adulto", "idoso")     # só texto
 factor(c("criança", "adulto", "idoso"))     # fator
 ```
 
+
+
 ## Tipos de Dados
+
 ### Categórico 
 
 ```{r}
@@ -102,7 +156,10 @@ ordered(dados, levels = 1:3, labels = categs)
 
 Note as categorias
 
+
+
 ## Tipos de Dados
+
 ### Categórico 
 
 ```{r}
@@ -111,9 +168,13 @@ categs <- c("criança", "adulto", "idoso")
 factor(dados, levels = 1:3, labels = categs, ordered = T)
 ordered(dados, levels = 1:3, labels = categs)
 ```
+
 A mesma coisa
 
+
+
 ## Tipos de Dados
+
 ### Categórico 
 
 ```{r}
@@ -122,13 +183,25 @@ categs <- c("criança", "adulto", "idoso")
 ordered(c("criança", "adulto", "idoso"), levels = categs)  # Ok
 ```
 
+
+
+
+
+# Estruturas de Dados
+
+
+
 ## Estruturas de Dados
+
 1. vetorial (`c()`, `vector()`), 
 2. lista/“dicionário” (`list()`), 
 3. matricial (`matrix()` e `array()`),
 4. conjunto de dados (`data.frame()`)
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 Por padrão, os dados no R são vetores 
@@ -142,7 +215,10 @@ Esse `[1]` antes do resultado
 dentro do vetor de comprimento unitário 
 que é o resultado da operação acima.
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 ```{r}
@@ -150,7 +226,10 @@ c(1, 2, 3, 4)
 1:4
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 ```{r}
@@ -161,7 +240,10 @@ c(1, 2, 3, 4)
 O `[24]` na segunda linha do resultado de `1:40` 
 é um lembrete que o valor `24` ocupa a 24^a^ posição do resultado da operação.
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 A função `c()` gera vetores e também junta e "achata" múltiplos vetores em um único vetor.
@@ -171,7 +253,10 @@ c(1, 2, 3, 4); c(5, 6, 7, 8)
 c(c(1, 2, 3, 4), c(5, 6, 7, 8))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 Os dados de um vetor **têm** que ser do mesmo tipo.
@@ -184,7 +269,10 @@ c(1, 2, 3, 4)
 c(1, 2, 3, 4, "A")
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 Os dados de um vetor **têm** que ser do mesmo tipo.
@@ -196,7 +284,10 @@ que os comporte através de *regras de coerção*.
 typeof(c(1L, 2L, 3L, 4L)); typeof(c(1, 2L, 3L, 4L))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Vetores 
 
 Os dados de um vetor **têm** que ser do mesmo tipo.
@@ -212,6 +303,7 @@ c(1L, 2, 3 + 0i, "A")
 
 
 ## Estruturas de Dados
+
 ### Lista
 
 Informalmente, as listas podem ser pensadas como vetores 
@@ -222,7 +314,10 @@ sem que eles sejam forçados a terem o mesmo tipo em comum.
 list(1,2)
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Lista
 
 ```{r}
@@ -233,7 +328,10 @@ Esse `[[2]]` indica que a 2^a^ posição da lista é ocupada por um vetor.
 
 O `[1]` seguinte indica que a 1^a^ posição desse vetor é o valor `2` apresentado.
 
+
+
 ## Estruturas de Dados
+
 ### Lista
 
 É possível aninhar listas dentro de listas.
@@ -242,14 +340,20 @@ O `[1]` seguinte indica que a 1^a^ posição desse vetor é o valor `2` apresent
 list(list(1, 2), c(1, 2))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Lista
 
 ```{r}
 list(list(list(1, 2), 3))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Lista
 
 Mas dá para "achatar" a lista em um vetor
@@ -257,116 +361,658 @@ Mas dá para "achatar" a lista em um vetor
 unlist(list(list(list(1, 2), 3)))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Matrizes e *Arrays*
 
-Matrizes podem ser pensadas como vetores com duas "direções" e 
-*arrays* como vetores com várias "direções".
+Matrizes podem ser pensadas como vetores com duas "direções" e *arrays* como 
+vetores com várias "direções".
 
 ```{r}
 matrix(c(1, 2, 3, 4), nrow = 2)
 matrix(1:8, nrow = 2)
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Matrizes e *Arrays*
 
-Matrizes podem ser pensadas como vetores com duas "direções" e 
-*arrays* como vetores com várias "direções".
+Matrizes podem ser pensadas como vetores com duas "direções" e *arrays* como 
+vetores com várias "direções".
 
 ```{r}
 array(1:12, dim = c(2, 3, 2))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Matrizes e *Arrays*
 
-Na verdade, vetores são *arrays* unidimensionais 
-e matrizes são *arrays* bidimensionais.
+Na verdade, vetores são *arrays* unidimensionais e matrizes são *arrays* 
+bidimensionais.
 
 ```{r}
 array(1:4, dim = c(4))
 array(1:4, dim = c(2,2))
 ```
 
-## Estruturas de Dados
-### Matrizes e *Arrays*
 
-Por motivos históricos, as matrizes são preenchidas no R por colunas 
-ao invés de ser por linhas, mas isso pode ser mudado.
+
+## Estruturas de Dados
+
+Por motivos históricos, as matrizes são preenchidas no R por colunas ao invés de 
+ser por linhas, mas isso pode ser mudado.
 
 ```{r}
-matrix(1:8, nrow = 2, byrow = T)
+matrix(1:9, nrow = 3)
+matrix(1:9, nrow = 3, byrow = T)
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Matrizes e *Arrays*
 
-Assim, como os vetores, 
-os valores de uma matriz e *array* têm que ser do mesmo tipo
-ou então eles são forçados por regras de coreção.
+Assim, como os vetores, os valores de uma matriz e *array* têm que ser do mesmo 
+tipo ou então eles são forçados por regras de coreção.
 
 ```{r}
 array(c(1, 2, 3, "A"), dim = c(2,2))
 ```
 
+
+
 ## Estruturas de Dados
+
 ### Conjunto de Dados (*Data Frames*)
 
+No R, o típico conjunto de dados é um *data frame*.
+
+Criamos um *data frame* com a função `data.frame()` 
+
+```{r}
+data.frame(
+    nome = c("Ana", "Bia", "Ciro"), 
+    idade = c(20, 22, 27),
+    sexo = factor(c("f", "f", "m"))
+)
+```
+
+
+
+## Estruturas de Dados
+
+### Conjunto de Dados (*Data Frames*)
+
+Os argumentos de `data.frame()` são as variáveis (colunas) do conjunto de dados 
+e os seus nomes podem ser dados através dos nomes dos argumentos passados.
+
+Todos os argumentos de `data.frame()` devem ser vetores com o mesmo comprimento, 
+correspondendo ao número de observações no conjunto de dados
+
+
+
+## Estruturas de Dados
+
+### Conjunto de Dados (*Data Frames*)
+
+```{r}
+dados <- 
+    data.frame(
+        nome = c("Ana", "Bia", "Ciro"), 
+        idade = c(20, 22, 27),
+        sexo = factor(c("f", "f", "m"))
+    )
+dados
+```
+
+
+
+
+
+# Atributos
+
+
+
 ## Atributos
+
+As metainformações dos tipos de dados e das estruturas de dados são armazenados 
+na forma de atributos.
+
+1. `attributes()`
 1. `names()`, 
 2. `levels()` e `nlevels()`
 3. `dim()` e `dimnames()` 
 4. `rownames()` e `colnames()`
 5. `ncols()` e `nrows()`
 
+
+
+## Atributos
+
+### `attributes()`
+
+```{r}
+attributes(dados)
+```
+
+
+
+## Atributos
+
+### `names()`
+
+```{r}
+names(dados)
+names(dados) <- c("Nome", "Idade", "Sexo")
+dados
+```
+
+
+
+## Atributos
+
+### `levels()` e `nlevels()`
+
+```{r}
+grupo.etário <- 
+    ordered(c(3, 2, 1, 3, 2), 
+            levels = 1:3, 
+            labels = c("criança", "adulto", "idoso"))
+grupo.etário
+```
+
+
+
+## Atributos
+
+### `levels()` e `nlevels()`
+
+```{r}
+levels(grupo.etário)
+nlevels(grupo.etário)
+```
+
+
+
+## Atributos
+
+### `levels()` e `nlevels()`
+
+```{r}
+levels(grupo.etário) <- c("CRI", "ADU", "IDO")
+grupo.etário
+```
+
+
+
+## Atributos
+
+### `levels()` e `nlevels()`
+
+```{r}
+levels(grupo.etário) <- c("criança", "adulto", "idoso", "imortal")
+grupo.etário
+nlevels(grupo.etário)
+```
+
+
+
+## Atributos
+
+### `dim()` e `dimnames()` 
+
+```{r}
+dim(dados)
+dimnames(dados)
+```
+
+
+## Atributos
+
+### `rownames()` e `colnames()`
+
+```{r}
+rownames(dados)
+colnames(dados)
+```
+
+
+## Atributos
+
+### `ncols()` e `nrows()`
+
+```{r}
+ncol(dados)
+nrow(dados)
+```
+
+
+
+
+
+# “Não-Dados” do R
+
+
+
 ## Os “Não-Dados” do R
+
 1. Dado faltante (*missing*): `NA` -- *Not Available*
 2. Dado não numérico: `NaN` -- *Not a Number*
 3. Valor Infinito: `Inf`
 4. Ausência de valor: `NULL`
 
+
+
 ## Os “Não-Dados” do R
+
 ### Dado Faltante
+
 ```{r}
 idades <- c(18, 28, NA, 32)
 idades
 ```
 
+
+
 ## Os “Não-Dados” do R
+
 ### Dado Não Numérico
+
 ```{r}
 log(-2)
 ```
 
+
+
 ## Os “Não-Dados” do R
+
 ###  Valor Infinito
+
 ```{r}
 log(0)
 ```
 
+
+
 ## Os “Não-Dados” do R
+
 ###  Ausência de Valor
+
 ```{r}
 c()
 ```
 
+
+
+
+
 # Programação em R
+
+
+
 ## Programação em R
-1. Operador de atribuição
-2. Operadores de extração (*subscripting*) 
+
+1. *Scripts*
+1. Comentários
+1. Funções
+1. Operadores de atribuição
+2. Operadores de indexação
+5. Operações e funções matemáticas
+5. Operações e funções de comparação
+5. Operações e funções lógicas
 3. Instruções de repetição
 4. Instruções de execução condicional
-5. Operações matemáticas
-5. Operações de comparação
-5. Operações lógicas
-5. Funções
 
-## Operador de Atribuição
 
-O operador `<-`
 
-## Operadores de Extração
+
+
+# *Scripts*
+
+
+
+## *Scripts*
+
+Em R, tudo é uma expressão e, nesse sentido, o próprio R é apenas uma grande
+calculadora, que lê expressões e as avalia, retornando um valor ou objeto.
+
+Chamamos de ***script*** ou **programa** o arquivo de texto que contém o 
+conjunto de operações e expressões em R a serem realizadas no seu conjunto de 
+dados e que resultarão em tabelas, gráficos ou resultados.
+
+Esse arquivo é geralmente identificado pelas extensões `.R` ou `.r`
+
+
+
+## *Scripts*
+
+O comando `source("calcula.R")` executa o *script* que está armazenado no 
+diretório ou pasta atual com o nome `analise.R`.
+
+```{r}
+writeLines(readLines("calcula.R"))
+source("calcula.R")
+```
+
+O R lê e avalia sequencialmente as operações que estão no arquivo `calcula.R`.
+
+
+
+
+
+# Comentários
+
+
+
+## Comentários
+
+É possível armazenar informações importantes sobre o seu *script* dentro do seu 
+próprio *script*, de modo que você consiga lembrar quando você precisar no 
+futuro quando você já tiver esquecido.
+
+Para isso, basta colocar o símbolo `#` em qualquer ponto do seu *script*, que o R ignorará tudo o que estiver escrito do símbolo `#` até o final da linha.
+
+```{r}
+print("Isto será impresso")  # mas isto aqui sequer será avaliado pelo R
+```
+
+
+
+## Comentários
+
+**DICA**
+
+**DOCUMENTE O SEU *SCRIPT* COM COMENTÁRIOS**
+
+**SEMPRE**
+
+É sério.
+
+Seis meses após você ter escrito o seu programa (tipo, quando você estiver 
+escrevendo a sua monografia, dissertação ou tese...), você **NÃO VAI LEMBRAR** 
+por que catzo você fez as escolhas que você fez.
+
+
+
+
+# Funções
+
+
+
+## Funções em R
+
+Em R, é possível criar um objeto que realiza uma mesma sequência de operações 
+fixas com um conjunto de objetos do R quaisquer que você indique.
+
+Chamamos esse tipo de objeto uma **função**.
+
+Uma função pode recebe como **argumentos** ou **parâmetros** um certo número de 
+objetos, realiza operações e pode retornar um objeto como resultado das 
+operações realizadas.
+
+
+
+## Funções em R
+
+Por exemplo, a função `log()` recebeu um argumento numérico 10 e retornou o 
+valor do logaritmo neperiano (i.e., de base $e=2.718281828$) do seu argumento
+
+```{r}
+log(10)
+```
+
+
+
+## Funções em R
+
+A função `log()` também poderia ter recebido dois argumentos 
+numéricos: o valor cujo logaritmo é desejado e a *base* desejada do logaritmo.
+
+```{r}
+log(10, 10)
+log(10, 2)
+```
+
+
+
+## Usando Funções Existentes
+
+Como já vimos, para executar uma função existente, fazemos uma referência ao seu 
+nome seguido de parênteses cercando os argumentos da função (caso haja) 
+
+Caso avaliemos apenas o nome da função *sem* os parênteses, o objeto é retornado 
+e veremos o código da função.
+
+```{r}
+log       #  isto não é uma chamada à função logarítmica
+log(10)   # já isto sim, pois há argumentos entre os parênteses
+```
+
+
+
+## Usando Funções Existentes
+
+Note que os argumentos de `log()` têm nomes e que `log()` tem um valor padrão 
+para o argumento `base`, caso esse argumento seja omitido, mas não tem um valor padrão para o argumento `x`.
+
+Casos os nomes sejam omitidos, os argumentos são avaliados na ordem em que 
+aparecem, mas se os nomes estiverem presentes, a ordem com a qual aparecem não 
+importa.
+
+
+
+## Usando Funções Existentes
+
+```{r}
+log(10, 2)
+log(x = 10, base = 2)
+log(base = 2, x = 10)
+```
+
+
+
+## Usando Funções Existentes
+
+Se omitíssemos o argumento `x`, que não tem um valor padrão para o caso de 
+omissão, receberíamos uma mensagem do R
+
+```{r, error = TRUE}
+log()
+log(base = 10)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Você cria uma função usando `function` seguido de parênteses e de uma expressão 
+que será avaliada toda vez que a função for chamada e será retornada como o 
+valor da função.
+
+```{r}
+f <- function() return(expressão)
+```
+
+ou simplesmente
+
+```{r}
+f <- function() expressão 
+```
+
+Essa expressão é chamada de **corpo** da função.
+
+
+
+## Criando as suas Próprias Funções
+
+Se você quiser que sua função receba um ou mais argumentos para serem utilizados 
+no corpo da função, você deve incluí-los entre os parênteses após `function`.
+
+```{r}
+f <- function(x) x + 2
+g <- function(x, y) x * y / 2
+f(5)
+g(3, 7)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se chamar a função com mais ou menos argumentos do que a função espera receber, 
+você receberá uma mensagem de erro.
+
+```{r, error = TRUE}
+f(5, 3)
+g(2)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se você escolher definir um valor padrão para um argumento na definição da 
+função, então ele pode ser omitido sem erro quando a função for executada.
+
+```{r}
+g <- function(x, y = 7) x * y / 2
+g(3, 7)
+g(3)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Você pode precisar realizar várias operações intermediárias antes de chegar ao 
+resultado que você pretende retornar na sua função.  
+
+Nesse caso, é possível executar essas várias operações dentro da função 
+(inclusive criando variáveis temporárias, que serão descartadas após o término 
+da execução da função) e retornar apenas o resultado da última expressão 
+executada ou o resultado da expressão passada para o `return()`.
+
+
+
+## Criando as suas Próprias Funções
+
+Basta envolver entre chaves `{}` o conjunto de expressões a serem consideradas 
+como o corpo da função.
+
+Para separar as expressões do corpo da função (dentro do `{}`), basta deixar 
+cada expressão em uma linha separada.
+
+```{r}
+g <- function(x) {
+    print(summary(x))
+    hist(x)
+    sum((x ^ 2) * log(x + 3))
+}
+```
+
+
+
+## Criando as suas Próprias Funções
+
+```{r, fig.height = 2, fig.width = 2}
+g(c(2,3,1,4,3,5,3,4,5,3,4))
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se for o caso, é possível deixar mais de uma expressão na mesma linha, desde que 
+separadas por ponto e vírgula `;`.
+
+```{r}
+g <- function(x) {print(summary(x)); hist(x); sum((x ^ 2) * log(x + 3))}
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Caso uma expressão fique muito grande para ficar em uma única linha, 
+basta pular para a linha seguintes ***desde que*** o R perceba que a expressão 
+ainda não acabou, como, por exemplo, 
+
+```{r}
+h <- function(x) {              # falta o corpo da função, logo o R 
+                                # continua lendo na próxima linha
+    x ^ 3 + 2 * x ^ 2 +         # idem
+    30 * x - 50 * x ^ (1 / 2)   # acabou
+}
+h(2)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Além de definir o valor de retorno, `return()` também encerra a execução da 
+função e volta para a chamada da função ao invés de executar o restante do corpo 
+da função.
+
+```{r}
+h <- function(x) {
+    if (x >= 0)
+        return(x)
+    else
+        return(-x)
+}
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se você não quiser retornar valor nenhum, simplesmente use `return()` sem nada dentro dos parênteses.
+
+```{r, fig.height=2, fig.width=3}
+h <- function(x) {
+    hist(x)
+    return()
+}
+h(c(2,5,3,5,7,4,6,7,3,6,4,5,3,5,3,5,4,2,4))
+```
+
+
+
+# Operadores de Atribuição
+
+
+
+## Operadores de Atribuição
+
+Como já vimos, o operador `<-` associa um objeto do R a um nome.
+
+Mas há também o operador `->`
+
+```{r}
+x <- 2
+2 -> y
+x == y
+```
+
+
+
+
+
+# Operadores de Indexação
+
+
+
+## Operadores de Indexação
+
 1. Os operadores `[]`, `[[]]` e `$`
 2. Indexando nas linhas e colunas
 3. Indexando com vetores numéricos positivos e negativos 
@@ -376,42 +1022,77 @@ O operador `<-`
 
 ***
 
-AQUI!!!  Um slide para cada um desses
+**AQUI!!!**  Um slide para cada um desses
+
+
+
+
+
+# Operações e Funções Matemáticas
+
+
+
+## Operações e Funções Matemáticas
+
+**AQUI!!!**
+
+
+
+
+
+# Operações e Funções de Comparação
+
+
+
+## Operações e Funções de Comparação
+
+**AQUI!!!**
+
+
+
+
+
+# Operações e Funções Lógicas
+
+
+
+## Operações e Funções Lógicas
+
+**AQUI!!!**
+
+
+
+
+
+# Instruções de Repetição
+
+
 
 ## Instruções de Repetição (*Loop*)
+
 1. A instrução `for`
     1. `1:N`, 
     2. `names()`
     3. `seq()`, `seq_len()` e `seq_along()`
 2. *As instruções `while`, `repeat`, `break` e `next`*
 
+***
+
+**AQUI!!!** Um slide para cada um desses
+
+
+
+
+
+# Instruções de Execução Condicional
+
+
+
 ## Instruções de Execução Condicional
+
 1. As instruções `if` e `else`
-2. *A função `switch()`*
+2. A função `ifelse()`
+2. A função `switch()`
 
-## Funções e Operações, Operações e Funções 
-1. Operações matemáticas
-2. Operações de comparação
-3. Operações lógicas
-4. Executando funções existentes
-5. Criando as suas próprias funções
 
-## Programação em R
-### Operações de Comparação
 
-**AQUI!!!**
-
-## Programação em R
-### Operações Lógicas
-
-**AQUI!!!**
-
-## Programação em R
-### Executando Funções Existentes
-
-**AQUI!!!**
-
-## Programação em R
-### Criando as suas Próprias Funções
-
-**AQUI!!!**
