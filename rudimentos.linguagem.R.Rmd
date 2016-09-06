@@ -2391,23 +2391,191 @@ resultando nos `NA`s observados.
 
 
 
-# Operações e Funções Matemáticas
+# Operadores e Funções Matemáticas
+## Operadores Matemáticos
+
+1. `+` -- adição
+1. `-` -- subtração
+1. `*` -- produto escalar
+1. `/` -- divisão real
+1. `^` ou `**` -- potência
+1. `%%` -- resto de divisão
+1. `%/%` -- divisão inteira
+1. `%*%` -- produto interno
+1. `%o%` -- produto externo
+
+
+
+## Operações Matemáticas
+
+No R, todas as operações foram pensadas para serem realizadas com vetores
+
+```{r}
+2 + 2
+c(1,2,3,4) * c(10, 20, 30, 40)
+(1:5) ^ 2
+```
+
+
+
+## Um parênteses: Operadores Binários em Geral
+
+O R pode ser bastante complacente com as operações entre vetores.
+
+Quando as dimensões dos dois vetores não coincidem, o R "recicla" o menor 
+vetor quantas vezes for necessário para dar conta do vetor maior.
+
+```{r}
+c(1, 2, 3, 4, 5, 6) + c(2, 3, 4)
+c(1, 2, 3, 4, 5, 6, 7, 8, 9) + c(2, 3, 4)
+```
+
+
+
+## Um parênteses: Operadores Binários em Geral
+
+Contudo, se o comprimento do maior vetor não for um múltiplo do comprimento do 
+menor vetor, o R realiza a operação do mesmo jeito, mas sinaliza a discrepância 
+através de uma mensagem de aviso.
+
+```{r, warning=TRUE}
+c(1, 2, 3, 4, 5) + c(2, 3, 4)
+```
+
+
+
+## Operações Matemáticas
+
+Note a importância dos parênteses
+
+```{r}
+(1:5) ^ 2
+1:5 ^ 2
+```
+
+Na segunda expressão, a operação `^` é realizada antes da operação `:`.
+
+
+
+
+
+## Operações Matemáticas
+
+Note a diferença entre `/`, `%/%` e `%%`
+
+```{r}
+2:10 / 2
+2:10 %/% 2
+2:10 %% 2
+```
+
+
+
+## Operações Matemáticas
+
+Note a diferença entre os três operadores de multiplicação `*`, `%*%` e `%o%`
+
+```{r}
+1:3 * 1:3
+1:3 %*% 1:3
+1:3 %o% 1:3
+```
+
+
+
+## Funções Matemáticas
+
+Boa parte das funções matemáticas básicas estão disponíveis no R e são 
+vetorizadas.
+
+1. Função exponencial `exp()` 
+1. Funções logaritmicas `log()`, `log10()` e `log2()`
+1. Funções gerais `abs()`, `sign()` e `sqrt()`
+1. Funções de arredondamento/truncamento: `floor()`, `ceiling()`, `trunc()`, 
+`round()`, `signif()`
+1. Outras Funções
+    1. Funções trigonométricas: `cos`, `sin`, `tan`, `acos`, `asin`, `atan`
+    1. Funções hiperbólicas: `cosh`, `sinh`, `tanh`, `acosh`, `asinh`, `atanh`
+
+
+
+## Funções Matemáticas
+
+```{r}
+exp(1:3)
+log(1:3)
+abs(-2:2)
+sign(-2:2)
+```
+
+
+
+## Funções Matemáticas
+
+```{r}
+floor((-10:10)/10)
+ceiling((-10:10)/10)
+trunc((-10:10)/10)
+round((-10:10)/10)
+```
+
+
+
+## Funções Matemáticas
+
+```{r}
+(1:4)/3
+signif((1:4)/3, 1)
+signif((1:4)/3, 2)
+signif((1:4)/3, 3) # digitos significativos != casas decimais
+```
+
+
+
+## Funções Matemáticas
+
+```{r}
+(1:4)/3
+round((1:4)/3, 1)
+round((1:4)/3, 2)
+round((1:4)/3, 3)
+```
 
 
 
 ## Operações e Funções Matemáticas
 
-1. `+`
-1. `-`
-1. `*`
-1. `/`
-1. `^` or `**`
-1. `%%`
-1. `%/%`
-1. `%*%`
-1. `%o%`
+Na verdade, cada operador é um atalho conveniente para uma função
 
-**AQUI!!!** um slide para cada?
+```{r}
+2 + 2
+sum(2, 2)
+```
+
+
+
+## Operações e Funções Matemáticas
+
+Na verdade, cada operador é um atalho conveniente para uma função
+
+```{r}
+`+`
+sum
+```
+
+## Operações e Funções Matemáticas
+
+Note que o \` (backtick, aspa simples reversa, ou tique) serve para fazer 
+referência ao símbolo `+`.  Sem ele, o R daria erro por falta dos valores a 
+serem somados.
+
+```{r}
+`+`
+```
+
+```{r, error=TRUE}
++
+```
 
 
 
@@ -2427,7 +2595,27 @@ resultando nos `NA`s observados.
 1. `!=`
 1. `%in%`
 
-**AQUI** Um slide para cada?
+
+
+## Operações e Funções de Comparação
+
+```{r}
+1:10 < 5
+1:10 <= 5
+1:10 > 5
+1:10 >= 5
+```
+
+
+
+## Operações e Funções de Comparação
+
+```{r}
+1:10 == 5
+1:10 != 5
+1:10 %in% c(2, 3, 5, 7, 9, 11, 13)
+```
+
 
 
 
@@ -2448,6 +2636,22 @@ resultando nos `NA`s observados.
 1. `all()`
 
 **AQUI!!!** Um slide para cada um desses?
+
+
+
+## Ordem de Precedência
+
+Ordem decrescente de precedência entre operadores
+
+|                          |                                          |
+|:-------------------------+:-----------------------------------------|
+| 1) `$`                   |   8) `+` e `-` binários                  |
+| 2) `[]` e `[[]]`         |   9) `<`, `>`, `<=`, `>=`, `==` e `!=`   |
+| 3) `^`                   |  10) `!`                                 |
+| 4) `-` e `+` unários     |  11) `&` e `&&`                          |
+| 5) `:`                   |  12) `|` e `||`                          |
+| 6) `%%` e `%/%`          |  13) `->`                                |
+| 7) `*` e `/`             |  14) `<-`                                |
 
 
 
