@@ -2635,7 +2635,25 @@ serem somados.
 1. `any()`
 1. `all()`
 
-**AQUI!!!** Um slide para cada um desses?
+
+
+## Operações e Funções Lógicas
+
+```{r}
+!c(T, F)
+c(T, T, F, F) & c(T, F, T, F)
+c(T, T, F, F) | c(T, F, T, F)
+xor(c(T, T, F, F), c(T, F, T, F))
+```
+
+
+
+## Operações e Funções Lógicas
+
+```{r}
+any(c(T, F))
+all(c(T, F))
+```
 
 
 
@@ -2652,6 +2670,18 @@ Ordem decrescente de precedência entre operadores
 | 5) `:`                   |  12) `|` e `||`                          |
 | 6) `%%` e `%/%`          |  13) `->`                                |
 | 7) `*` e `/`             |  14) `<-`                                |
+
+
+
+## Brincando de Lego
+
+Um exemplo interessante
+
+```{r}
+idades
+idades < 30
+idades[idades < 30]
+```
 
 
 
