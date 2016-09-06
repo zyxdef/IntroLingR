@@ -59,17 +59,15 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Tipos de Dados
 
-1. quantitativo (`numeric()`), 
-2. textual (`character()`), 
-3. lógico (`logical()`), 
-4. categórico (`factor()` e `ordered()`)
+1. quantitativo, 
+2. textual, 
+3. lógico, 
+4. categórico
 5. outros
 
 
 
-## Tipos de Dados
-
-### Quantitativo
+## Quantitativo
 
 O R consegue lidar números
 
@@ -84,30 +82,70 @@ Valores numéricos são *double* por padrão, a menos que explicitado outro tipo
 
 
 
-## Tipos de Dados
+## Quantitativo
 
-###Textual
-
-O R consegue lidar com informações textuais
-
-```{r}
-'Isto é um texto'
-"Isto também"
-paste("Nós somos", "dois textos.")
+```{r 1, eval=FALSE}
+2
+2L
+2 + 0i
 ```
 
 
 
-## Tipos de Dados
+## Quantitativo
 
-###Lógico
+```{r 1}
+```
+
+
+
+## Quantitativo
+
+```{r 1a, eval=FALSE}
+2 + 3
+2L + 3L
+log(3.4)
+log(3.4 + 0i)
+```
+
+
+
+## Quantitativo
+
+```{r 1a}
+```
+
+
+
+## Textual
+
+O R consegue lidar com informações textuais
+
+```{r 2, eval=FALSE}
+'Isto é um texto'
+"Isto também"
+paste("Nós somos", "três textos,", "mas vamos virar um só!")
+```
+
+
+
+## Textual
+
+O R consegue lidar com informações textuais
+
+```{r 2}
+```
+
+
+
+## Lógico
 
 O R consegue lidar com valores lógicos: 
 
 - verdadeiro (`TRUE` ou `T`) 
 - falso (`FALSE` ou `F`)
 
-```{r}
+```{r 3, eval=FALSE}
 2 < 3
 x <- (2 < 3)
 x
@@ -115,9 +153,19 @@ x
 
 
 
-## Tipos de Dados
+## Lógico
 
-### Categórico 
+O R consegue lidar com valores lógicos: 
+
+- verdadeiro (`TRUE` ou `T`) 
+- falso (`FALSE` ou `F`)
+
+```{r 3}
+```
+
+
+
+## Categórico 
 
 O R consegue lidar com dados qualitativos 
 
@@ -132,56 +180,94 @@ Eles têm metainformação, que os dados textuais não têm.
 
 
 
-## Tipos de Dados
+## Categórico 
 
-### Categórico 
+### **Importante**
 
-```{r}
+Rotina como `aov()` (que realiza ANOVA) exigem que variáveis qualitativas tenham
+sido armazenadas como fatores.
+
+Se você tentar executar `aov()` com uma regressora quantitativa, vai ser 
+retornada a tabela de ANOVA da regressão linear ao invés da tabela de ANOVA da 
+análise de variância
+
+        Depois não diga que eu não avisei...
+
+
+
+## Categórico 
+
+```{r 4, eval=FALSE}
 c("criança", "adulto", "idoso")     # só texto
 factor(c("criança", "adulto", "idoso"))     # fator
 ```
 
 
 
-## Tipos de Dados
+## Categórico 
 
-### Categórico 
+```{r 4}
+```
 
-```{r}
-dados <- c(3, 2, 1, 3, 2)
+
+
+## Categórico 
+
+```{r 4a, eval=FALSE}
+observações <- c(3, 2, 1, 3, 2)
 categs <- c("criança", "adulto", "idoso")
-factor(dados, levels = 1:3, labels = categs)
-ordered(dados, levels = 1:3, labels = categs)
+factor(observações, levels = 1:3, labels = categs)
+ordered(observações, levels = 1:3, labels = categs)
+```
+
+
+
+## Categórico 
+
+```{r 4a}
 ```
 
 Note as categorias
 
 
 
-## Tipos de Dados
+## Categórico 
 
-### Categórico 
-
-```{r}
-dados <- c(3, 2, 1, 3, 2)
+```{r 4b, eval=FALSE}
+observações <- c(3, 2, 1, 3, 2)
 categs <- c("criança", "adulto", "idoso")
-factor(dados, levels = 1:3, labels = categs, ordered = T)
-ordered(dados, levels = 1:3, labels = categs)
+factor(observações, levels = 1:3, labels = categs, ordered = T)
+ordered(observações, levels = 1:3, labels = categs)
+```
+
+
+
+## Categórico 
+
+```{r 4b}
 ```
 
 A mesma coisa
 
 
 
-## Tipos de Dados
+## Categórico 
 
-### Categórico 
-
-```{r}
-ordered(c("criança", "adulto", "idoso")) # Errado! Note as categorias
+```{r 4c, eval=FALSE}
+ordered(c("criança", "adulto", "idoso"))
 categs <- c("criança", "adulto", "idoso")
-ordered(c("criança", "adulto", "idoso"), levels = categs)  # Ok
+ordered(c("criança", "adulto", "idoso"), levels = categs)
 ```
+
+
+
+## Categórico 
+
+```{r 4c}
+```
+
+O primeiro está errado (salvo situações excepcionais; note as categorias), mas 
+o segundo está certo.
 
 
 
@@ -200,9 +286,7 @@ ordered(c("criança", "adulto", "idoso"), levels = categs)  # Ok
 
 
 
-## Estruturas de Dados
-
-### Vetores 
+## Vetores 
 
 Por padrão, os dados no R são vetores 
 
@@ -210,31 +294,65 @@ Por padrão, os dados no R são vetores
 2 + 2
 ```
 
-Esse `[1]` antes do resultado 
-é a posição (um) do valor `4` 
-dentro do vetor de comprimento unitário 
-que é o resultado da operação acima.
+Esse `[1]` antes do resultado é a posição (um) do valor `4` dentro do vetor de 
+comprimento unitário que é o resultado da operação acima.
 
 
 
-## Estruturas de Dados
+## Vetores 
 
-### Vetores 
+A função `c()` gera vetores.
 
-```{r}
-c(1, 2, 3, 4)
-1:4
+```{r 5, eval=FALSE}
+c(1, 3, 3, 7)
 ```
 
 
 
-## Estruturas de Dados
+## Vetores 
 
-### Vetores 
+A função `c()` gera vetores.
 
-```{r}
+```{r 5}
+```
+
+
+
+## Vetores 
+
+A função `c()` também junta e "achata" múltiplos vetores em um único vetor.
+
+```{r 5a, eval=FALSE}
+c(c(1, 2, 3, 4), c(5, 6, 7, 8))
+```
+
+
+
+## Vetores 
+
+A função `c()` também junta e "achata" múltiplos vetores em um único vetor.
+
+```{r 5a}
+```
+
+
+
+## Vetores 
+
+O operador `:` gera sequências.
+
+```{r 5b, eval=FALSE}
 1:10
 1:40
+```
+
+
+
+## Vetores 
+
+O operador `:` gera sequências.
+
+```{r 5b}
 ```
 
 O `[24]` na segunda linha do resultado de `1:40` 
@@ -242,202 +360,313 @@ O `[24]` na segunda linha do resultado de `1:40`
 
 
 
-## Estruturas de Dados
+## Vetores 
 
-### Vetores 
-
-A função `c()` gera vetores e também junta e "achata" múltiplos vetores em um único vetor.
-
-```{r}
-c(1, 2, 3, 4); c(5, 6, 7, 8)
-c(c(1, 2, 3, 4), c(5, 6, 7, 8))
+```{r 5c, eval=FALSE}
+-1:10
+-1:-10
+-(1:10)
+-10:-1
 ```
 
 
 
-## Estruturas de Dados
+## Vetores 
 
-### Vetores 
+```{r 5c}
+```
+
+
+
+## Vetores 
 
 Os dados de um vetor **têm** que ser do mesmo tipo.
 
-Se não forem, o R converte todos para um mesmo tipo 
-que os comporte através de *regras de coerção*.
+Se não forem, o R converte todos para um mesmo tipo que os comporte através de 
+*regras de coerção*.
 
-```{r}
+```{r 5d, eval=FALSE}
 c(1, 2, 3, 4)
 c(1, 2, 3, 4, "A")
 ```
 
 
 
-## Estruturas de Dados
-
-### Vetores 
+## Vetores 
 
 Os dados de um vetor **têm** que ser do mesmo tipo.
 
-Se não forem, o R converte todos para um mesmo tipo 
-que os comporte através de *regras de coerção*.
+Se não forem, o R converte todos para um mesmo tipo que os comporte através de 
+*regras de coerção*.
 
-```{r}
+```{r 5d}
+```
+
+
+
+## Vetores 
+
+Os dados de um vetor **têm** que ser do mesmo tipo.
+
+Se não forem, o R converte todos para um mesmo tipo que os comporte através de 
+*regras de coerção*.
+
+```{r 5e, eval=FALSE}
 typeof(c(1L, 2L, 3L, 4L)); typeof(c(1, 2L, 3L, 4L))
 ```
 
 
 
-## Estruturas de Dados
-
-### Vetores 
+## Vetores 
 
 Os dados de um vetor **têm** que ser do mesmo tipo.
 
-Se não forem, o R converte todos para um mesmo tipo 
-que os comporte através de *regras de coerção*.
+Se não forem, o R converte todos para um mesmo tipo que os comporte através de 
+*regras de coerção*.
 
-```{r}
+```{r 5e}
+```
+
+
+
+## Vetores 
+
+Os dados de um vetor **têm** que ser do mesmo tipo.
+
+Se não forem, o R converte todos para um mesmo tipo que os comporte através de 
+*regras de coerção*.
+
+```{r 5f, eval=FALSE}
 c(1L, 2, 3 + 0i)
 c(1L, 2, 3 + 0i, "A")
 ```
 
 
 
-## Estruturas de Dados
+## Vetores 
 
-### Lista
+Os dados de um vetor **têm** que ser do mesmo tipo.
 
-Informalmente, as listas podem ser pensadas como vetores 
-que comportam dados de diferentes tipos 
-sem que eles sejam forçados a terem o mesmo tipo em comum.
+Se não forem, o R converte todos para um mesmo tipo que os comporte através de 
+*regras de coerção*.
 
-```{r}
-list(1,2)
+```{r 5f}
 ```
 
 
 
-## Estruturas de Dados
+## Listas
 
-### Lista
+Informalmente, as listas podem ser pensadas como vetores que comportam dados de 
+diferentes tipos sem que eles sejam forçados a terem o mesmo tipo em comum.
 
-```{r}
+```{r 6a, eval=FALSE}
 list(1, 2)
+list(1, "a")
+```
+
+
+
+## Listas
+
+Informalmente, as listas podem ser pensadas como vetores que comportam dados de 
+diferentes tipos sem que eles sejam forçados a terem o mesmo tipo em comum.
+
+```{r 6a}
 ```
 
 Esse `[[2]]` indica que a 2^a^ posição da lista é ocupada por um vetor.
 
-O `[1]` seguinte indica que a 1^a^ posição desse vetor é o valor `2` apresentado.
+O `[1]` seguinte indica que a 1^a^ posição desse vetor é o valor `2` 
+apresentado.
 
 
 
-## Estruturas de Dados
-
-### Lista
+## Listas
 
 É possível aninhar listas dentro de listas.
 
-```{r}
+```{r 6b, eval=FALSE}
 list(list(1, 2), c(1, 2))
 ```
 
 
 
-## Estruturas de Dados
+## Listas
 
-### Lista
+É possível aninhar listas dentro de listas.
 
-```{r}
+```{r 6b}
+```
+
+
+
+## Listas
+
+É possível dar nomes aos elementos de uma lista.
+
+```{r 6c, eval=FALSE}
+list(x = 1, y = 2, tipo = "novo")
+```
+
+
+
+## Listas
+
+É possível aninhar listas dentro de listas.
+
+```{r 6c}
+```
+
+
+
+## Listas
+
+```{r 6d, eval=FALSE}
 list(list(list(1, 2), 3))
 ```
 
 
+## Listas
 
-## Estruturas de Dados
-
-### Lista
-
-Mas dá para "achatar" a lista em um vetor
-```{r}
-unlist(list(list(list(1, 2), 3)))
+```{r 6d}
 ```
 
 
 
-## Estruturas de Dados
+## Listas
 
-### Matrizes e *Arrays*
+Mas dá para "achatar" a lista em um vetor
+```{r 6e, eval=FALSE}
+unlist(list(list(list(1, 2), 3)))
+unlist(list(x = 1, y = 2, tipo = "novo"))
+```
+
+
+
+## Listas
+
+Mas dá para "achatar" a lista em um vetor
+```{r 6e}
+```
+
+
+
+## Matrizes e *Arrays*
 
 Matrizes podem ser pensadas como vetores com duas "direções" e *arrays* como 
 vetores com várias "direções".
 
-```{r}
+```{r 7, eval=FALSE}
 matrix(c(1, 2, 3, 4), nrow = 2)
 matrix(1:8, nrow = 2)
 ```
 
 
 
-## Estruturas de Dados
-
-### Matrizes e *Arrays*
+## Matrizes e *Arrays*
 
 Matrizes podem ser pensadas como vetores com duas "direções" e *arrays* como 
 vetores com várias "direções".
 
-```{r}
+```{r 7}
+```
+
+
+
+## Matrizes e *Arrays*
+
+Matrizes podem ser pensadas como vetores com duas "direções" e *arrays* como 
+vetores com várias "direções".
+
+```{r 7a, eval=FALSE}
 array(1:12, dim = c(2, 3, 2))
 ```
 
 
 
-## Estruturas de Dados
+## Matrizes e *Arrays*
 
-### Matrizes e *Arrays*
+Matrizes podem ser pensadas como vetores com duas "direções" e *arrays* como 
+vetores com várias "direções".
+
+```{r 7a}
+```
+
+
+
+## Matrizes e *Arrays*
 
 Na verdade, vetores são *arrays* unidimensionais e matrizes são *arrays* 
 bidimensionais.
 
-```{r}
+```{r 7b, eval=FALSE}
 array(1:4, dim = c(4))
 array(1:4, dim = c(2,2))
 ```
 
 
 
-## Estruturas de Dados
+## Matrizes e *Arrays*
 
-Por motivos históricos, as matrizes são preenchidas no R por colunas ao invés de 
-ser por linhas, mas isso pode ser mudado.
+Na verdade, vetores são *arrays* unidimensionais e matrizes são *arrays* 
+bidimensionais.
 
-```{r}
+```{r 7b}
+```
+
+
+
+## Matrizes e *Arrays*
+
+Por motivos históricos, as matrizes são preenchidas no R por colunas ao invés 
+de ser por linhas, mas isso pode ser mudado.
+
+```{r 7c, eval=FALSE}
 matrix(1:9, nrow = 3)
 matrix(1:9, nrow = 3, byrow = T)
 ```
 
 
 
-## Estruturas de Dados
+## Matrizes e *Arrays*
 
-### Matrizes e *Arrays*
+Por motivos históricos, as matrizes são preenchidas no R por colunas ao invés 
+de ser por linhas, mas isso pode ser mudado.
+
+```{r 7c}
+```
+
+
+
+## Matrizes e *Arrays*
 
 Assim, como os vetores, os valores de uma matriz e *array* têm que ser do mesmo 
 tipo ou então eles são forçados por regras de coreção.
 
-```{r}
+```{r 7d, eval=FALSE}
 array(c(1, 2, 3, "A"), dim = c(2,2))
 ```
 
 
 
-## Estruturas de Dados
+## Matrizes e *Arrays*
 
-### Conjunto de Dados (*Data Frames*)
+Assim, como os vetores, os valores de uma matriz e *array* têm que ser do mesmo 
+tipo ou então eles são forçados por regras de coreção.
+
+```{r 7d}
+```
+
+
+
+## *Data Frames*
 
 No R, o típico conjunto de dados é um *data frame*.
 
 Criamos um *data frame* com a função `data.frame()` 
 
-```{r}
+```{r 8, eval=FALSE}
 data.frame(
     nome = c("Ana", "Bia", "Ciro"), 
     idade = c(20, 22, 27),
@@ -447,30 +676,152 @@ data.frame(
 
 
 
-## Estruturas de Dados
+## *Data Frames*
 
-### Conjunto de Dados (*Data Frames*)
+No R, o típico conjunto de dados é um *data frame*.
+
+Criamos um *data frame* com a função `data.frame()` 
+
+```{r 8}
+```
+
+
+
+## *Data Frames*
 
 Os argumentos de `data.frame()` são as variáveis (colunas) do conjunto de dados 
 e os seus nomes podem ser dados através dos nomes dos argumentos passados.
 
-Todos os argumentos de `data.frame()` devem ser vetores com o mesmo comprimento, 
+Todos os argumentos de `data.frame()` devem ser vetores com o mesmo comprimento,
 correspondendo ao número de observações no conjunto de dados
 
 
 
-## Estruturas de Dados
+## *Data Frames*
 
-### Conjunto de Dados (*Data Frames*)
-
-```{r}
-dados <- 
+```{r 8a, eval=FALSE}
+conjdados <- 
     data.frame(
         nome = c("Ana", "Bia", "Ciro"), 
         idade = c(20, 22, 27),
         sexo = factor(c("f", "f", "m"))
     )
-dados
+conjdados
+```
+
+
+
+## *Data Frames*
+
+```{r 8a}
+```
+
+
+
+## *Data Frames*
+
+Um *data frame* pode ser tratado como lista e também como matriz.
+
+- aceita `[]` com um vetor de inteiros ou de strings e retorna um *data frame*
+(que nem uma lista)
+- aceita `[[]]` com um inteiro ou string e retorna um vetor (que nem uma lista)
+- aceita `[ , ]` com um par de vetores de inteiros ou de strings e retorna um 
+*data frame* (que nem uma matriz)
+
+
+
+## *Data Frames*
+
+```{r 8b, eval=FALSE}
+conjdados[1] # data frame
+conjdados[1:2] # data frame
+```
+
+
+
+## *Data Frames*
+
+```{r 8b}
+```
+
+
+
+## *Data Frames*
+
+```{r 8c, eval=FALSE}
+conjdados[1] # data frame
+conjdados[[1]] # vetor
+```
+
+
+
+## *Data Frames*
+
+```{r 8c}
+```
+
+
+
+## *Data Frames*
+
+```{r 8d, eval=FALSE}
+conjdados[1] # data frame
+conjdados[1, 1] # vetor
+```
+
+
+
+## *Data Frames*
+
+```{r 8d}
+```
+
+
+
+## *Data Frames*
+
+```{r 8e, eval=FALSE}
+conjdados[1, 1] # vetor
+conjdados[1:2, 1:2] # data frame
+```
+
+
+
+## *Data Frames*
+
+```{r 8e}
+```
+
+
+
+## *Data Frames*
+
+```{r 8f, eval=FALSE}
+conjdados[1:2, 1] # vetor
+conjdados[1:2, 1:2] # data frame
+```
+
+
+
+## *Data Frames*
+
+```{r 8f}
+```
+
+
+
+## *Data Frames*
+
+```{r 8g, eval=FALSE}
+conjdados[1:2, 1] # vetor
+conjdados[1:2, "Nome"] # vetor
+```
+
+
+
+## *Data Frames*
+
+```{r 8g}
 ```
 
 
@@ -486,7 +837,7 @@ dados
 As metainformações dos tipos de dados e das estruturas de dados são armazenados 
 na forma de atributos.
 
-1. `attributes()`
+1. `attributes()` e `str()`
 1. `names()`, 
 2. `levels()` e `nlevels()`
 3. `dim()` e `dimnames()` 
@@ -495,33 +846,56 @@ na forma de atributos.
 
 
 
-## Atributos
+## `attributes()` e `str()`
 
-### `attributes()`
-
-```{r}
-attributes(dados)
+```{r 9, eval=FALSE}
+attributes(conjdados)
 ```
 
 
 
-## Atributos
+## `attributes()` e `str()`
 
-### `names()`
-
-```{r}
-names(dados)
-names(dados) <- c("Nome", "Idade", "Sexo")
-dados
+```{r 9}
 ```
 
 
 
-## Atributos
+## `attributes()` e `str()`
 
-### `levels()` e `nlevels()`
+```{r 9a, eval=FALSE}
+str(conjdados)
+```
 
-```{r}
+
+
+## `attributes()` e `str()`
+
+```{r 9a}
+```
+
+
+
+## `names()`
+
+```{r 9b, eval=FALSE}
+names(conjdados)
+names(conjdados) <- c("Nome", "Idade", "Sexo")
+conjdados
+```
+
+
+
+## `names()`
+
+```{r 9b}
+```
+
+
+
+##  `levels()` e `nlevels()`
+
+```{r 9c, eval=FALSE}
 grupo.etário <- 
     ordered(c(3, 2, 1, 3, 2), 
             levels = 1:3, 
@@ -531,33 +905,48 @@ grupo.etário
 
 
 
-## Atributos
+##  `levels()` e `nlevels()`
 
-### `levels()` e `nlevels()`
+```{r 9c}
+```
 
-```{r}
+
+
+## `levels()` e `nlevels()`
+
+```{r 9d, eval=FALSE}
 levels(grupo.etário)
 nlevels(grupo.etário)
 ```
 
 
 
-## Atributos
+## `levels()` e `nlevels()`
 
-### `levels()` e `nlevels()`
+```{r 9d}
+```
 
-```{r}
+
+
+## `levels()` e `nlevels()`
+
+```{r 9e, eval=FALSE}
 levels(grupo.etário) <- c("CRI", "ADU", "IDO")
 grupo.etário
 ```
 
 
 
-## Atributos
+## `levels()` e `nlevels()`
 
-### `levels()` e `nlevels()`
+```{r 9e}
+```
 
-```{r}
+
+
+## `levels()` e `nlevels()`
+
+```{r 9f, eval=FALSE}
 levels(grupo.etário) <- c("criança", "adulto", "idoso", "imortal")
 grupo.etário
 nlevels(grupo.etário)
@@ -565,33 +954,58 @@ nlevels(grupo.etário)
 
 
 
-## Atributos
+## `levels()` e `nlevels()`
 
-### `dim()` e `dimnames()` 
-
-```{r}
-dim(dados)
-dimnames(dados)
+```{r 9f}
 ```
 
 
-## Atributos
 
-### `rownames()` e `colnames()`
+## `dim()` e `dimnames()` 
 
-```{r}
-rownames(dados)
-colnames(dados)
+```{r 9g, eval=FALSE}
+dim(conjdados)
+dimnames(conjdados)
 ```
 
 
-## Atributos
 
-### `ncols()` e `nrows()`
+## `dim()` e `dimnames()` 
 
-```{r}
-ncol(dados)
-nrow(dados)
+```{r 9g}
+```
+
+
+
+## `rownames()` e `colnames()`
+
+```{r 9h, eval=FALSE}
+rownames(conjdados)
+colnames(conjdados)
+```
+
+
+
+
+## `rownames()` e `colnames()`
+
+```{r 9h}
+```
+
+
+
+## `ncols()` e `nrows()`
+
+```{r 9i, eval=FALSE}
+ncol(conjdados)
+nrow(conjdados)
+```
+
+
+
+## `ncols()` e `nrows()`
+
+```{r 9i}
 ```
 
 
@@ -611,43 +1025,68 @@ nrow(dados)
 
 
 
-## Os “Não-Dados” do R
+## Dado Faltante
 
-### Dado Faltante
-
-```{r}
+```{r 10, eval=FALSE}
 idades <- c(18, 28, NA, 32)
 idades
+log(idades)
 ```
 
 
 
-## Os “Não-Dados” do R
+## Dado Faltante
 
-### Dado Não Numérico
-
-```{r}
-log(-2)
+```{r 10}
 ```
 
 
 
-## Os “Não-Dados” do R
+## Dado Não Numérico
 
-###  Valor Infinito
-
-```{r}
-log(0)
+```{r 10a, eval=FALSE}
+idades <- c(18, 28, -2, 32)
+idades
+log(idades)
 ```
 
 
 
-## Os “Não-Dados” do R
+## Dado Não Numérico
 
-###  Ausência de Valor
+```{r 10a}
+```
 
-```{r}
+
+
+## Valor Infinito
+
+```{r 10b, eval=FALSE}
+idades <- c(18, 28, 0, 32)
+idades
+log(idades)
+```
+
+
+
+## Valor Infinito
+
+```{r 10b}
+```
+
+
+
+## Ausência de Valor
+
+```{r 10c, eval=FALSE}
 c()
+```
+
+
+
+## Ausência de Valor
+
+```{r 10c}
 ```
 
 
@@ -718,7 +1157,8 @@ O R lê e avalia sequencialmente as operações que estão no arquivo `calcula.R
 próprio *script*, de modo que você consiga lembrar quando você precisar no 
 futuro quando você já tiver esquecido.
 
-Para isso, basta colocar o símbolo `#` em qualquer ponto do seu *script*, que o R ignorará tudo o que estiver escrito do símbolo `#` até o final da linha.
+Para isso, basta colocar o símbolo `#` em qualquer ponto do seu *script*, que o 
+R ignorará tudo o que estiver escrito do símbolo `#` até o final da linha.
 
 ```{r}
 print("Isto será impresso")  # mas isto aqui sequer será avaliado pelo R
@@ -763,10 +1203,20 @@ operações realizadas.
 ## Funções em R
 
 Por exemplo, a função `log()` recebeu um argumento numérico 10 e retornou o 
-valor do logaritmo neperiano (i.e., de base $e=2.718281828$) do seu argumento
+valor do logaritmo neperiano (i.e., de base *e*=2.718281828) do seu argumento
 
-```{r}
+```{r 11, eval=FALSE}
 log(10)
+```
+
+
+
+## Funções em R
+
+Por exemplo, a função `log()` recebeu um argumento numérico 10 e retornou o 
+valor do logaritmo neperiano (i.e., de base *e*=2.718281828) do seu argumento
+
+```{r 11}
 ```
 
 
@@ -776,24 +1226,47 @@ log(10)
 A função `log()` também poderia ter recebido dois argumentos 
 numéricos: o valor cujo logaritmo é desejado e a *base* desejada do logaritmo.
 
-```{r}
+```{r 11a, eval=FALSE}
 log(10, 10)
 log(10, 2)
 ```
 
 
 
+## Funções em R
+
+A função `log()` também poderia ter recebido dois argumentos 
+numéricos: o valor cujo logaritmo é desejado e a *base* desejada do logaritmo.
+
+```{r 11a}
+```
+
+
+
 ## Usando Funções Existentes
 
-Como já vimos, para executar uma função existente, fazemos uma referência ao seu 
-nome seguido de parênteses cercando os argumentos da função (caso haja) 
+Como já vimos, para executar uma função existente, fazemos uma referência ao seu
+nome seguido de parênteses cercando os argumentos da função (caso haja).
 
-Caso avaliemos apenas o nome da função *sem* os parênteses, o objeto é retornado 
+Caso avaliemos apenas o nome da função *sem* os parênteses, o objeto é retornado
 e veremos o código da função.
 
-```{r}
+```{r 11b, eval=FALSE}
 log       #  isto não é uma chamada à função logarítmica
-log(10)   # já isto sim, pois há argumentos entre os parênteses
+log(10)   # já isto sim, pois há os parênteses
+```
+
+
+
+## Usando Funções Existentes
+
+Como já vimos, para executar uma função existente, fazemos uma referência ao seu
+nome seguido de parênteses cercando os argumentos da função (caso haja).
+
+Caso avaliemos apenas o nome da função *sem* os parênteses, o objeto é retornado
+e veremos o código da função.
+
+```{r 11b}
 ```
 
 
@@ -801,7 +1274,8 @@ log(10)   # já isto sim, pois há argumentos entre os parênteses
 ## Usando Funções Existentes
 
 Note que os argumentos de `log()` têm nomes e que `log()` tem um valor padrão 
-para o argumento `base`, caso esse argumento seja omitido, mas não tem um valor padrão para o argumento `x`.
+para o argumento `base`, caso esse argumento seja omitido, mas não tem um valor
+padrão para o argumento `x`.
 
 Casos os nomes sejam omitidos, os argumentos são avaliados na ordem em que 
 aparecem, mas se os nomes estiverem presentes, a ordem com a qual aparecem não 
@@ -811,7 +1285,7 @@ importa.
 
 ## Usando Funções Existentes
 
-```{r}
+```{r 11c, eval=FALSE}
 log(10, 2)
 log(x = 10, base = 2)
 log(base = 2, x = 10)
@@ -821,13 +1295,56 @@ log(base = 2, x = 10)
 
 ## Usando Funções Existentes
 
+```{r 11c}
+```
+
+
+
+## Usando Funções Existentes
+
 Se omitíssemos o argumento `x`, que não tem um valor padrão para o caso de 
 omissão, receberíamos uma mensagem do R
 
-```{r, error = TRUE}
+```{r 11d, eval=FALSE}
 log()
 log(base = 10)
 ```
+
+
+
+## Usando Funções Existentes
+
+Se omitíssemos o argumento `x`, que não tem um valor padrão para o caso de 
+omissão, receberíamos uma mensagem do R
+
+```{r 11d, error=TRUE}
+```
+
+
+
+## Usando Funções Existentes
+
+Para descobrir quais parâmetros têm valor padrão e quais não, podemos usar o 
+*help* (no caso de funções dos pacotes) ou ver a definição da função
+
+```{r 11e, eval=FALSE}
+log
+```
+
+
+
+## Usando Funções Existentes
+
+Para descobrir quais parâmetros têm valor padrão e quais não, podemos usar o 
+*help* (no caso de funções dos pacotes) ou ver a definição da função
+
+```{r 11e}
+```
+
+Note que `base` é seguido de `=exp(1)` (que é o seu valor padrão), ao passo que
+`x` não.
+
+Na prática, um parâmetro com valor padrão é um parâmetro opcional da função.
 
 
 
@@ -837,13 +1354,13 @@ Você cria uma função usando `function` seguido de parênteses e de uma expres
 que será avaliada toda vez que a função for chamada e será retornada como o 
 valor da função.
 
-```{r}
+```{r, eval=FALSE}
 f <- function() return(expressão)
 ```
 
 ou simplesmente
 
-```{r}
+```{r, eval=FALSE}
 f <- function() expressão 
 ```
 
@@ -853,10 +1370,10 @@ Essa expressão é chamada de **corpo** da função.
 
 ## Criando as suas Próprias Funções
 
-Se você quiser que sua função receba um ou mais argumentos para serem utilizados 
+Se você quiser que sua função receba um ou mais argumentos para serem utilizados
 no corpo da função, você deve incluí-los entre os parênteses após `function`.
 
-```{r}
+```{r 11f, eval=FALSE}
 f <- function(x) x + 2
 g <- function(x, y) x * y / 2
 f(5)
@@ -867,12 +1384,32 @@ g(3, 7)
 
 ## Criando as suas Próprias Funções
 
+Se você quiser que sua função receba um ou mais argumentos para serem utilizados
+no corpo da função, você deve incluí-los entre os parênteses após `function`.
+
+```{r 11f}
+```
+
+
+
+## Criando as suas Próprias Funções
+
 Se chamar a função com mais ou menos argumentos do que a função espera receber, 
 você receberá uma mensagem de erro.
 
-```{r, error = TRUE}
+```{r 11g, eval=FALSE}
 f(5, 3)
 g(2)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se chamar a função com mais ou menos argumentos do que a função espera receber, 
+você receberá uma mensagem de erro.
+
+```{r 11g, error = TRUE}
 ```
 
 
@@ -882,10 +1419,20 @@ g(2)
 Se você escolher definir um valor padrão para um argumento na definição da 
 função, então ele pode ser omitido sem erro quando a função for executada.
 
-```{r}
+```{r 11h, eval=FALSE}
 g <- function(x, y = 7) x * y / 2
 g(3, 7)
 g(3)
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se você escolher definir um valor padrão para um argumento na definição da 
+função, então ele pode ser omitido sem erro quando a função for executada.
+
+```{r 11h}
 ```
 
 
@@ -922,8 +1469,15 @@ g <- function(x) {
 
 ## Criando as suas Próprias Funções
 
-```{r, fig.height = 2, fig.width = 2}
+```{r 11i, eval=FALSE}
 g(c(2,3,1,4,3,5,3,4,5,3,4))
+```
+
+
+
+## Criando as suas Próprias Funções
+
+```{r 11i, fig.height = 2, fig.width = 2}
 ```
 
 
@@ -945,11 +1499,11 @@ Caso uma expressão fique muito grande para ficar em uma única linha,
 basta pular para a linha seguintes ***desde que*** o R perceba que a expressão 
 ainda não acabou, como, por exemplo, 
 
-```{r}
-h <- function(x) {              # falta o corpo da função, logo o R 
-                                # continua lendo na próxima linha
-    x ^ 3 + 2 * x ^ 2 +         # idem
-    30 * x - 50 * x ^ (1 / 2)   # acabou
+```{r 11j, eval=FALSE}
+h <- function(x) {             # o R continua lendo na próxima linha, 
+                             # pois falta o corpo da função
+    x ^ 3 + 2 * x ^ 2 +       # idem, pois falta um valor após o +
+    30 * x - 50 * x ^ (1 / 2) # acabou
 }
 h(2)
 ```
@@ -958,8 +1512,19 @@ h(2)
 
 ## Criando as suas Próprias Funções
 
+Caso uma expressão fique muito grande para ficar em uma única linha, 
+basta pular para a linha seguintes ***desde que*** o R perceba que a expressão 
+ainda não acabou, como, por exemplo, 
+
+```{r 11j}
+```
+
+
+
+## Criando as suas Próprias Funções
+
 Além de definir o valor de retorno, `return()` também encerra a execução da 
-função e volta para a chamada da função ao invés de executar o restante do corpo 
+função e volta para a chamada da função ao invés de executar o restante do corpo
 da função.
 
 ```{r}
@@ -975,14 +1540,25 @@ h <- function(x) {
 
 ## Criando as suas Próprias Funções
 
-Se você não quiser retornar valor nenhum, simplesmente use `return()` sem nada dentro dos parênteses.
+Se você não quiser retornar valor nenhum, simplesmente use `return()` sem nada 
+dentro dos parênteses.
 
-```{r, fig.height=2, fig.width=3}
+```{r 11k, eval=FALSE}
 h <- function(x) {
     hist(x)
     return()
 }
 h(c(2,5,3,5,7,4,6,7,3,6,4,5,3,5,3,5,4,2,4))
+```
+
+
+
+## Criando as suas Próprias Funções
+
+Se você não quiser retornar valor nenhum, simplesmente use `return()` sem nada 
+dentro dos parênteses.
+
+```{r 11k, fig.height=2, fig.width=3}
 ```
 
 
@@ -997,10 +1573,21 @@ Como já vimos, o operador `<-` associa um objeto do R a um nome.
 
 Mas há também o operador `->`
 
-```{r}
+```{r 12, eval=FALSE}
 x <- 2
 2 -> y
 x == y
+```
+
+
+
+## Operadores de Atribuição
+
+Como já vimos, o operador `<-` associa um objeto do R a um nome.
+
+Mas há também o operador `->`
+
+```{r 12}
 ```
 
 
@@ -1014,15 +1601,791 @@ x == y
 ## Operadores de Indexação
 
 1. Os operadores `[]`, `[[]]` e `$`
-2. Indexando nas linhas e colunas
+2. Indexando nas linhas e nas colunas
 3. Indexando com vetores numéricos positivos e negativos 
 4. Indexando com vetores lógicos 
 5. Indexando com vetores textuais
 6. A opção `drop = F` do operador `[]`
 
-***
 
-**AQUI!!!**  Um slide para cada um desses
+
+## Operador `[]`
+
+O operador `[]` pode ser usado de várias formas
+
+- com vetor
+- com matriz
+- com *array*
+- com lista
+- com *data frame*
+
+
+
+## Operador `[]` com vetor
+
+```{r 13a, eval=FALSE}
+dado <- 1:10
+dado
+dado[2] 
+dado[c(2, 5)]
+```
+
+
+
+## Operador `[]` com vetor
+
+```{r 13a}
+```
+
+
+
+## Operador `[]` com matriz
+
+```{r 13b, eval=FALSE}
+dado <- matrix(1:9, ncol = 3)
+dado
+dado[1] # retorna elemento
+dado[4] 
+```
+
+
+
+## Operador `[]` com matriz
+
+```{r 13b}
+```
+
+
+
+## Operador `[]` com matriz
+
+```{r 13c, eval=FALSE}
+dado[1:4]  # retorna elementos
+dado[1, 1] # retorna elemento
+dado[1, 2] 
+dado[2, 1] 
+```
+
+
+
+## Operador `[]` com matriz
+
+```{r 13c}
+```
+
+
+
+## Operador `[]` com matriz
+
+```{r 13d, eval=FALSE}
+dado[2:3, 1:2] # retorna matriz
+dado[2, ] # retorna linha como vetor
+dado[, 1] # retorna coluna como vetor
+```
+
+
+
+## Operador `[]` com matriz
+
+```{r 13d}
+```
+
+
+
+## Operador `[]` com matriz
+
+### Opção `drop = FALSE`
+
+As expressões `dado[2, ]` e `dado[, 1]` retornaram dois vetores, ao invés de 
+terem retornado matrizes 1*x*3 e 3*x*1 respectivamente.
+
+Isso ocorreu porque, por padrão, o operador `[]` descarta a estrutura se o 
+resultado da expressão for uma matriz linha ou matriz coluna.
+
+Para evitar esse comportamento padrão, podemos usar a opção `drop = FALSE` do 
+operador `[]`
+
+
+
+## Operador `[]` com matriz
+
+### Opção `drop = FALSE`
+
+```{r 13e, eval=FALSE}
+dado[2, ] # retorna linha como vetor
+dado[2, , drop = F] # retorna matriz
+```
+
+
+
+## Operador `[]` com matriz
+
+### Opção `drop = FALSE`
+
+```{r 13e}
+```
+
+
+
+## Operador `[]` com matriz
+
+### Opção `drop = FALSE`
+
+```{r 13f, eval=FALSE}
+dado[, 1] # retorna coluna como vetor
+dado[, 1, drop = F] # retorna matriz
+```
+
+
+
+## Operador `[]` com matriz
+
+### Opção `drop = FALSE`
+
+```{r 13f}
+```
+
+
+
+## Operador `[]` com *array*
+
+```{r 13g, eval=FALSE}
+tensor <- 
+    array(1:8, dim = c(2,2,2))
+tensor
+```
+
+
+
+## Operador `[]` com *array*
+
+```{r 13g}
+```
+
+
+
+## Operador `[]` com *array*
+```{r 13h, eval=FALSE}
+tensor[1, 1, 1] # retorna elemento
+tensor[1, 1, 2]
+tensor[1, 2, 1]
+tensor[2, 1, 1]
+```
+
+
+
+## Operador `[]` com *array*
+```{r 13h}
+```
+
+
+
+## Operador `[]` com *array*
+```{r 13i, eval=FALSE}
+tensor[1, 1, ] # retorna vetor
+tensor[1, , 1]
+tensor[, 1, 1]
+```
+
+
+
+## Operador `[]` com *array*
+```{r 13i}
+```
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+Da mesma forma que para matrizes, o operador `[]` também descarta a estrutura 
+por padrão se o resultado for um *array* unidimensional.
+
+Também aqui, é possível usar a opção `drop = FALSE`
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+```{r 13j, eval=FALSE}
+tensor[1, 1, , drop = F] # retorna array
+```
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+```{r 13j}
+```
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+```{r 13k, eval=FALSE}
+tensor[1, , 1, drop = F] # retorna array
+```
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+```{r 13k}
+```
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+```{r 13l, eval=FALSE}
+tensor[, 1, 1, drop = F] # retorna array
+```
+
+
+
+## Operador `[]` com *array*
+
+Opção `drop = FALSE`
+
+```{r 13l}
+```
+
+
+
+## Operador `[]` com *array*
+
+```{r 13m, eval=FALSE}
+tensor[1, , ] # retorna matriz
+tensor[, 1, ]
+tensor[, , 1]
+```
+
+
+
+## Operador `[]` com *array*
+
+```{r 13m}
+```
+
+
+
+## Operador `[]` com *array*
+
+```{r 13n, eval=FALSE}
+tensor[1, , ] # retorna matriz
+tensor[1] # retorna elemento
+tensor[1, ] # dá erro
+```
+
+
+
+## Operador `[]` com *array*
+
+```{r 13n, error=TRUE}
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13o, eval=FALSE}
+lista <- list(1, 2, 3)
+lista
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13o}
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13p, eval=FALSE}
+lista[1] # retorna lista
+lista[1:2] # retorna lista
+lista[c(1, 2)] # o mesmo resultado
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13p}
+```
+
+
+
+## Operador `[]` com lista
+
+Aqui, `drop = FALSE` não surte efeito algum.
+
+```{r 13q, eval=FALSE}
+lista[c(1, 2)]
+lista[c(1, 2), drop = F]
+```
+
+
+
+## Operador `[]` com lista
+
+Aqui, `drop = FALSE` não surte efeito algum.
+
+```{r 13q}
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13r, eval=FALSE}
+lista[c(1, 2)] # retorna lista
+lista[1, 2] # dá erro
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13r, error=TRUE}
+```
+
+
+
+## Operador `[]` com lista
+
+Nem mesmo com
+
+```{r 13s, eval=FALSE}
+lista <- list(list(1, 2), list(1, 2))
+lista
+lista[1, 2]
+```
+
+
+
+## Operador `[]` com lista
+
+Nem mesmo com
+
+```{r 13s, error=TRUE}
+```
+
+
+
+
+
+
+## Operador `[]` com lista
+
+Nem mesmo com
+
+```{r 13s1, eval=FALSE}
+lista[1, 2]
+```
+
+
+
+## Operador `[]` com lista
+
+Nem mesmo com
+
+```{r 13s1, error=TRUE}
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13t, eval=FALSE}
+lista[1, 2] # dá erro
+lista[1] # retorna lista
+```
+
+
+
+## Operador `[]` com lista
+
+```{r 13t, error=TRUE}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13v, eval=FALSE}
+conjdados # retorna data frame
+conjdados[1, 1] # retorna vetor de fator 
+conjdados[3, 2] # retorna vetor numérico 
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13v}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13w, eval=FALSE}
+conjdados[1] # retorna data frame
+conjdados[1, ] # retorna data frame
+conjdados[, 1] # retorna vetor
+conjdados[1, 1] # retorna vetor
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13w}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13x, eval=FALSE}
+conjdados[1] # retorna data frame
+conjdados[, 1] # retorna vetor
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13x}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13y, eval=FALSE}
+conjdados[1] # retorna um data frame
+conjdados["Nome"] # a mesma coisa
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13y}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+### Opção `drop`
+
+A opção `drop = F` funciona com *data frames* também.
+
+Apesar de existe uma opção `drop = T`, ela não exerce o efeito esperado e apenas
+faz um mensagem de aviso ser emitida.
+
+
+
+## Operador `[]` com *data frame*
+
+### Opção `drop`
+
+```{r 13z, eval=FALSE}
+conjdados[, "Nome"] 
+conjdados[, "Nome", drop = F] # funciona como esperado
+```
+
+
+
+## Operador `[]` com *data frame*
+
+### Opção `drop`
+
+```{r 13z}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+### Opção `drop`
+
+```{r 13aa, eval=FALSE}
+conjdados["Nome"]
+conjdados["Nome", drop = T]  # NÃO funciona como esperado
+```
+
+
+
+## Operador `[]` com *data frame*
+
+### Opção `drop`
+
+```{r 13aa}
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13ab, eval=FALSE}
+conjdados[, 1] # retorna um vetor de fatores
+conjdados[, "Nome"] # a mesma coisa
+```
+
+
+
+## Operador `[]` com *data frame*
+
+```{r 13ab}
+```
+
+
+
+## Operador `[[]]`
+
+O operador `[[]]` pode ser usado com 
+
+- listas
+- *data frames*
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14a, eval=FALSE}
+lista <- list(x = 1:5, y = 2:10, z = 3:9)
+lista
+lista[[1]] # retorna um elemento
+```
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14a}
+```
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14b, eval=FALSE}
+lista <- list(x = list(1,2), y = 2:10, z = 3:9)
+lista
+```
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14b}
+```
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14c, eval=FALSE}
+lista[[1]] # retorna um elemento (que é uma lista)
+lista[[c(1,2)]] # retorna o elemento da lista retornada acima
+```
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14c}
+```
+
+
+
+## Operador `[[]]` com lista
+
+Compare
+
+```{r 14d, eval=FALSE}
+lista[c(1,2)] 
+lista[[c(1,2)]] 
+```
+
+
+
+## Operador `[[]]` com lista
+
+```{r 14d}
+```
+
+
+
+## Operador `[[]]` com *data frame*
+
+```{r 14e, eval=FALSE}
+conjdados[[1]]
+conjdados[["Nome"]]
+```
+
+
+
+## Operador `[[]]` com *data frame*
+
+```{r 14e}
+```
+
+
+
+## Operador `$`
+
+Funciona tanto com lista como com *data frame*.
+
+```{r 15a, eval=FALSE}
+lista$y
+conjdados$Nome
+```
+
+
+
+## Operador `$`
+
+Funciona tanto com lista como com *data frame*.
+
+```{r 15a}
+```
+
+
+
+## Operador `$`
+
+Compare
+
+```{r 15b, eval=FALSE}
+lista[["y"]]
+lista$y
+```
+
+
+
+## Operador `$`
+
+Compare
+
+```{r 15b}
+```
+
+
+
+## Operador `$`
+
+Compare
+
+```{r 15c, eval=FALSE}
+conjdados[["Nome"]]
+conjdados$Nome
+```
+
+
+
+## Operador `$`
+
+Compare
+
+```{r 15c}
+```
+
+
+
+## Indexando com vetores numéricos negativos 
+
+Ao utilizar o operador `[]` com vetores de inteiros negativos, obtemos como 
+resultado a estrutura de dados **sem** as posições informadas.
+
+
+
+## Indexando com vetores numéricos negativos 
+
+```{r 16, eval=FALSE}
+idades <- c(20, 23, 18, 39, 32, 27, 19, 35)
+idades
+idades[-c(3, 2, 5, 7)] # sem os 2o, 3o, 5o e 7o elementos
+idades[-1:-5] # sem os elementos 1o a 5o
+```
+
+
+
+## Indexando com vetores numéricos negativos 
+
+```{r 16}
+```
+
+
+
+## Indexando com vetores lógicos 
+
+Ao utilizar o operador `[]` com vetores de lógicos, obtemos como 
+resultado a estrutura de dados **com** as posições correspondentes a `TRUE` e 
+**sem** as posições correspondentes a `FALSE` no vetor lógico.
+
+O vetor usado como índice **precisa** necessariamente ter as mesmas dimensões 
+que a estrutura de dados.
+
+
+
+## Indexando com vetores lógicos 
+
+```{r 17a, eval=FALSE}
+idades[c(T, T, F, F, T, F, F, T)] # 8 elementos
+conjdados[c(T, F, T), "Nome"] # 3 linhas
+conjdados[c(T, F, T), c(F, T)] # 3 linhas e 2 colunas
+```
+
+
+
+## Indexando com vetores lógicos 
+
+```{r 17a}
+```
+
+
+
+## Indexando com vetores lógicos 
+
+Se o vetor índice não tiver as mesmas dimensões da estrutura de dados, poderão 
+ou não ocorrer erros.
+
+```{r 17b, eval=FALSE}
+idades[c(T, T, F, F)] # idade tem 8 elementos
+idades[c(T, T, F, F, T, T, F, F, T, T, F, F)] # idade tem 8 elementos
+```
+
+
+
+## Indexando com vetores lógicos 
+
+```{r 17b, error=TRUE}
+```
+
+No primeiro caso, o vetor índice foi "reciclado": se `indice` for igual ao vetor
+`c(T, T, F, F)`, então `idades[indice]` virará `idades[c(indice,indice)]`.
+
+No segundo caso, o vetor índice avançou para além do fim da estrutura de dados, 
+resultando nos `NA`s observados.
 
 
 
@@ -1034,7 +2397,17 @@ x == y
 
 ## Operações e Funções Matemáticas
 
-**AQUI!!!**
+1. `+`
+1. `-`
+1. `*`
+1. `/`
+1. `^` or `**`
+1. `%%`
+1. `%/%`
+1. `%*%`
+1. `%o%`
+
+**AQUI!!!** um slide para cada?
 
 
 
@@ -1046,8 +2419,15 @@ x == y
 
 ## Operações e Funções de Comparação
 
-**AQUI!!!**
+1. `<`
+1. `<=`
+1. `>`
+1. `>=`
+1. `==`
+1. `!=`
+1. `%in%`
 
+**AQUI** Um slide para cada?
 
 
 
@@ -1058,7 +2438,16 @@ x == y
 
 ## Operações e Funções Lógicas
 
-**AQUI!!!**
+1. `!`
+1. `&`
+1. `&&`
+1. `|`
+1. `||`
+1. `xor()`
+1. `any()`
+1. `all()`
+
+**AQUI!!!** Um slide para cada um desses?
 
 
 
@@ -1076,8 +2465,6 @@ x == y
     3. `seq()`, `seq_len()` e `seq_along()`
 2. *As instruções `while`, `repeat`, `break` e `next`*
 
-***
-
 **AQUI!!!** Um slide para cada um desses
 
 
@@ -1094,5 +2481,5 @@ x == y
 2. A função `ifelse()`
 2. A função `switch()`
 
-
+**AQUI!!!** Um slide para cada um desses
 
