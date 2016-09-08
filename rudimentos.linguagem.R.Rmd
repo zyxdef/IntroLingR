@@ -2673,14 +2673,20 @@ Ordem decrescente de precedência entre operadores
 
 
 
-## Brincando de Lego
-
-Um exemplo interessante
+## Exemplos de aplicação
 
 ```{r}
 idades
 idades < 30
 idades[idades < 30]
+```
+
+
+
+## Exemplos de aplicação
+
+```{r}
+conjdados[conjdados$Idade < 25, c("Nome", "Sexo")]
 ```
 
 
@@ -2696,10 +2702,340 @@ idades[idades < 30]
 1. A instrução `for`
     1. `1:N`, 
     2. `names()`
-    3. `seq()`, `seq_len()` e `seq_along()`
+    3. `seq()`
 2. *As instruções `while`, `repeat`, `break` e `next`*
 
-**AQUI!!!** Um slide para cada um desses
+
+
+## Instrução `for`
+
+A instrução `for` serve para repetir um trecho de código quantas vezes for 
+necessário.
+
+A sintaxe da instrução `for` é
+
+```
+for (variável in sequência) expressão
+```
+
+Se houver mais de a expressão, use `{}`
+
+```
+for (variável in sequência) {expressão; ...; expressão}
+```
+
+
+
+## Instrução `for`
+
+Quebrar a instrução em mais de uma linha geralmente aumenta a legibilidade do 
+seu código.
+
+```
+for (variável in sequência) 
+    expressão
+
+for (variável in sequência) {
+    expressão
+    ...
+    expressão
+}
+```
+
+
+
+## Instrução `for`
+
+É possível executar este código ...
+
+```{r}
+for (i in 1:3) print(idades[i])
+```
+
+
+
+## Instrução `for`
+
+... ao invés deste
+
+```{r}
+print(idades[1])
+print(idades[2])
+print(idades[3])
+```
+
+
+
+## Instrução `for`
+
+Claro, esse foi um exemplo bobinho, pois poderíamos ter executado
+
+```{r}
+print(idades[1:3])
+```
+
+
+
+## Exemplo de Aplicação
+
+Mas este exemplo não é tão bobinho
+
+```{r}
+for (nome in names(conjdados))
+    print(class(conjdados[[nome]]))
+```
+
+
+
+## Exemplo de Aplicação
+
+Isso é curioso, pois `conjdados` foi definido como
+
+```{r, eval=FALSE}
+conjdados <- 
+    data.frame(
+        nome = c("Ana", "Bia", "Ciro"), 
+        idade = c(20, 22, 27),
+        sexo = factor(c("f", "f", "m"))
+    )
+```
+
+e, depois, mudamos os nomes da variáveis para
+
+```{r, eval=FALSE}
+names(conjdados) <- c("Nome", "Idade", "Sexo")
+```
+
+mas não mudamos o tipo de `Nome` de textual (`character`) para categórico 
+(`factor`).
+
+
+
+## Exemplo de Aplicação
+
+Por que a primeira variável é categórica ao invés de texto?
+
+Por causa da sintaxe de `data.frame`
+
+```{r}
+data.frame
+```
+
+
+
+## Exemplo de Aplicação
+
+Tem muito...
+
+```{r}
+head(data.frame, n = 2)
+```
+
+Agora sim, podemos ver que `data.frame` tem vários parâmetros e que 
+`stringsAsFactors` tem por valor padrão 
+o resultado da função `default.stringsAsFactors()`, que é
+
+```{r}
+default.stringsAsFactors()
+```
+
+
+
+## Exemplo de Aplicação
+
+Ou seja, `data.frame()` automaticamente converte vetores de texto em fatores.
+
+Para evitar esse comportamento padrão, `conjdados` deveria ter sido definido com
+
+```{r 18}
+conjdados <- 
+    data.frame(
+        nome = c("Ana", "Bia", "Ciro"), 
+        idade = c(20, 22, 27),
+        sexo = factor(c("f", "f", "m")),
+        stringsAsFactors = FALSE
+    )
+```
+
+
+
+## Exemplo de Aplicação
+
+Agora sim
+
+```{r}
+for (nome in names(conjdados))
+    print(class(conjdados[[nome]]))
+```
+
+
+
+## Exemplo de Aplicação
+
+Por fim, note utilizamos `conjdados[[nome]]` dentro de `class()` ao invés de 
+`conjdados[nome]`.
+
+`conjdados[nome]` não teria retornado vetores, mas sim a mesma estrutura de 
+`conjdados`.  
+
+```{r}
+for (nome in names(conjdados))
+    print(class(conjdados[nome]))
+```
+
+Veremos mais sobre isso adiante no curso.
+
+
+
+## Instrução `for`
+
+Na verdade, podemos usar todo tipo de estrutura (vetor, lista, matriz, *array* 
+ou *data frame*) dentro de um `for` ou qualquer função que retorne uma 
+estrutura.
+
+Por exemplo, aqui
+
+```{r}
+for (variavel in conjdados)
+    print(class(variavel))
+```
+
+literalmente os vetores que compõem as colunas de `conjdados` são os valores 
+que `variavel` assume em cada iteração do *loop*.
+
+
+
+## Instrução `for`
+
+Interessante para usar com `for`:
+
+1. `seq()`
+1. `names()`
+
+
+
+## Instrução `for`
+
+### Função `seq()`
+
+1. `seq(num1, num2)` 
+    - o mesmo que `num1:num2`
+1. `seq(num1, num2, num3)`
+    - é tipo `num1:num2`, mas pulando de `num3` em `num3`
+1. `seq(num1, num2, length.out = num3)`
+    - é tipo `num1:num2`, mas com `num3` termos
+1. `seq(estrutura)`
+    - o mesmo que `1:length(estrutura)`
+
+
+
+## Instrução `for`
+
+### Função `seq()`
+
+```{r}
+seq(10, 20)
+seq(10, 20, 2)
+seq(10, 20, length.out = 3)
+```
+
+
+
+## Instrução `for`
+
+### Função `seq()`
+
+```{r}
+idades
+seq(idades)
+```
+
+
+
+## Instrução `for`
+
+### Função `seq()`
+
+Note a diferença
+
+```{r}
+seq(1, 20, 3) # os termos não ultrapassam 20
+seq(1, 20, length.out = 3) # ajusta o salto para dar 3 termos
+```
+
+
+
+## Outras Instruções de *Loop*
+
+Existem outras instruções referentes a *loop* em R, cumpre falar sobre elas,
+mas **eu** desaconselho vocês as usarem até terem mais experiência com R.
+
+1. `while`
+1. `repeat`
+1. `break`
+1. `next`
+
+
+
+## Outras Instruções de *Loop*
+
+1. `while`
+    - `while(`*condição*`)` *expressão*
+        - repete *expressão* enquanto *condição* for verdadeira
+1. `repeat`
+    - `repeat` *expressão*
+        - repete *expressão* para todo o sempre
+            - a menos que um `break` seja executado
+1. `break`
+    - interrompe um *loop* e vai para a próxima expressão
+1. `next`
+    - vai para a próxima iteração
+
+
+
+## Outras Instruções de *Loop*
+
+Um exemplo de *loop* com `while`
+
+```{r, eval=FALSE}
+resposta <- readline(prompt = "Qual é a sua resposta?")
+while (resposta!=42)
+{
+  print("A resposta tem que ser 42");
+  response <- readline(prompt = "Qual é a sua resposta?")
+} 
+```
+
+
+
+## Outras Instruções de *Loop*
+
+O mesmo *loop* com `repeat` e `break`
+
+```{r, eval=FALSE}
+repeat
+{
+  response <- readline(prompt = "Qual é a sua resposta?")
+  if (resposta == 42)
+      break
+  print("A resposta tem que ser 42");
+} 
+```
+
+
+
+## Outras Instruções de *Loop*
+
+Um exemplo com `next`
+
+```{r}
+for (k in 1:10)
+{
+    if (k %% 2)
+        next
+    print(k)
+}
+```
 
 
 
