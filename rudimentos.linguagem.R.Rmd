@@ -12,16 +12,16 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## O que veremos
 
-1. Tipos e estruturas de dados em R 
+1. Tipos e Estruturas de Dados em R 
 2. Programação em R
 
 
 
 ## O que veremos
 
-1. Tipos e estruturas de dados em R 
-    1. Tipos de dados
-    2. Estruturas de dados
+1. Tipos e Estruturas de Dados em R 
+    1. Tipos de Dados
+    2. Estruturas de Dados
     3. Atributos
     4. “Não-dados”
 2. Programação em R
@@ -35,13 +35,13 @@ knitr::opts_chunk$set(echo = FALSE)
     1. *Scripts*
     1. Comentários
     1. Funções
-    1. Operadores de atribuição
-    2. Operadores de indexação
-    2. Operações e funções matemáticas
-    2. Operações e funções de comparação
-    2. Operações e funções lógicas
-    3. Instruções de repetições
-    4. Instruções de execução condicional
+    1. Operadores de Atribuição
+    2. Operadores de Indexação
+    2. Operações e Funções Matemáticas
+    2. Operações e Funções de Comparação
+    2. Operações e Funções Lógicas
+    3. Instruções de Repetições
+    4. Instruções de Execução Condicional
 
 
 
@@ -59,11 +59,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Tipos de Dados
 
-1. quantitativo, 
-2. textual, 
-3. lógico, 
-4. categórico
-5. outros
+1. Quantitativo, 
+2. Textual, 
+3. Lógico, 
+4. Categórico
+5. Outros
 
 
 
@@ -271,6 +271,42 @@ o segundo está certo.
 
 
 
+## Outros Tipos de "Dados"
+
+Por incrível que pareça, o R consegue tratar código executável como dado.
+
+
+
+## Outros Tipos de "Dados"
+
+Por exemplo, já vimos 
+
+```{r}
+x <- 2
+typeof(x)
+x <- "A"
+typeof(x)
+```
+
+
+
+## Outros Tipos de "Dados"
+
+Mas isto é novidade
+
+```{r}
+x <- factor("A")
+typeof(x)
+x <- factor
+typeof(x)
+```
+
+O primeiro é um dado categórico, mas o tipo do segundo é a própria função que 
+precisamos executar para conseguir um dado categórico (identificado como 
+`closure` pelo R).
+
+
+
 
 
 # Estruturas de Dados
@@ -279,10 +315,10 @@ o segundo está certo.
 
 ## Estruturas de Dados
 
-1. vetorial (`c()`, `vector()`), 
-2. lista/“dicionário” (`list()`), 
-3. matricial (`matrix()` e `array()`),
-4. conjunto de dados (`data.frame()`)
+1. Vetorial (`c()`, `vector()`), 
+2. Lista/“dicionário” (`list()`), 
+3. Matricial (`matrix()` e `array()`),
+4. Conjunto de dados (`data.frame()`)
 
 
 
@@ -294,8 +330,8 @@ Por padrão, os dados no R são vetores
 2 + 2
 ```
 
-Esse `[1]` antes do resultado é a posição (um) do valor `4` dentro do vetor de 
-comprimento unitário que é o resultado da operação acima.
+Esse `[1]` antes do resultado é a posição (primeira) do valor `4` dentro do 
+vetor de comprimento unitário que é o resultado da operação acima.
 
 
 
@@ -2818,7 +2854,7 @@ Por que a primeira variável é categórica ao invés de texto?
 Por causa da sintaxe de `data.frame`
 
 ```{r}
-data.frame
+data.frame # para ver o corpo da função
 ```
 
 
@@ -2828,7 +2864,7 @@ data.frame
 Tem muito...
 
 ```{r}
-head(data.frame, n = 2)
+args(data.frame) # para ver apenas os argumentos da função
 ```
 
 Agora sim, podemos ver que `data.frame` tem vários parâmetros e que 
