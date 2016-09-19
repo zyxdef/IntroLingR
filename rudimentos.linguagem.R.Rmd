@@ -3512,200 +3512,200 @@ comprimento de `vetor.lógico`.
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-A função `switch()` tem as seguintes sintaxes:
+<!-- A função `switch()` tem as seguintes sintaxes: -->
 
-```{r, eval=FALSE}
-switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n)
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n) -->
 
-switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else)
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else) -->
 
-switch(expr, expr_1, expr_2, ..., expr_n)
-```
+<!-- switch(expr, expr_1, expr_2, ..., expr_n) -->
+<!-- ``` -->
 
-As duas primeiras sintaxes só funcionam se `expr` for do tipo texto.
+<!-- As duas primeiras sintaxes só funcionam se `expr` for do tipo texto. -->
 
-A última sintaxe funciona se `expr` for de qualquer outro tipo que não texto.
+<!-- A última sintaxe funciona se `expr` for de qualquer outro tipo que não texto. -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-As duas primeiras sintaxes só funcionam se `expr` for do tipo texto.
+<!-- As duas primeiras sintaxes só funcionam se `expr` for do tipo texto. -->
 
-```{r, eval=FALSE}
-switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n)
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n) -->
 
-switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else)
-```
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else) -->
+<!-- ``` -->
 
-- Nesse caso, o primeiro parâmetro não é nomeado e, opcionalmente, o último
-parâmetro também pode não ser nomeado.
-- Fora esses dois parâmetros, todos os demais têm que ser parâmetros nomeados.
-- Caso o nome dos parâmetros sejam nomes válidos de variáveis, então as aspas
-podem ser dispensadas.
+<!-- - Nesse caso, o primeiro parâmetro não é nomeado e, opcionalmente, o último -->
+<!-- parâmetro também pode não ser nomeado. -->
+<!-- - Fora esses dois parâmetros, todos os demais têm que ser parâmetros nomeados. -->
+<!-- - Caso o nome dos parâmetros sejam nomes válidos de variáveis, então as aspas -->
+<!-- podem ser dispensadas. -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-As duas primeiras sintaxes só funcionam se `expr` for do tipo texto.
+<!-- As duas primeiras sintaxes só funcionam se `expr` for do tipo texto. -->
 
-```{r, eval=FALSE}
-switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n)
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n) -->
 
-switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else)
-```
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else) -->
+<!-- ``` -->
 
-1. Se o valor de `expr` for igual a um dos nomes `valor_1`, `valor_2` etc. ou
-`valor_n`, então `switch()` retornará o valor da expressão `expr_1`, `expr_2`
-etc. ou `expr_n`
-1. Se o valor de `expr` não for igual a nenhum dos nomes `valor_1`, `valor_2`
-etc. ou `valor_n`, então `switch()` procura por um último parâmetro `expr_else`
-sem nome
-    1. Se houver, então `switch()` retorna o seu valor
-    1. Se não houver, então `switch()` retorna `NULL`
+<!-- 1. Se o valor de `expr` for igual a um dos nomes `valor_1`, `valor_2` etc. ou -->
+<!-- `valor_n`, então `switch()` retornará o valor da expressão `expr_1`, `expr_2` -->
+<!-- etc. ou `expr_n` -->
+<!-- 1. Se o valor de `expr` não for igual a nenhum dos nomes `valor_1`, `valor_2` -->
+<!-- etc. ou `valor_n`, então `switch()` procura por um último parâmetro `expr_else` -->
+<!-- sem nome -->
+<!--     1. Se houver, então `switch()` retorna o seu valor -->
+<!--     1. Se não houver, então `switch()` retorna `NULL` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- "x"
-switch(opção, x = 1, y = 2, z = 3, 4)
-opção <- "y"
-switch(opção, x = 1, y = 2, z = 3, 4)
-```
+<!-- ```{r} -->
+<!-- opção <- "x" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- opção <- "y" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- "z"
-switch(opção, x = 1, y = 2, z = 3, 4)
-opção <- "w"
-switch(opção, x = 1, y = 2, z = 3, 4)
-```
+<!-- ```{r} -->
+<!-- opção <- "z" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- opção <- "w" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-A última sintaxe funciona se `expr` for de qualquer outro tipo que não texto.
+<!-- A última sintaxe funciona se `expr` for de qualquer outro tipo que não texto. -->
 
-```{r, eval=FALSE}
-switch(expr, expr_1, expr_2, ..., expr_n)
-```
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, expr_1, expr_2, ..., expr_n) -->
+<!-- ``` -->
 
-1. Se o tipo de `expr` não for inteiro, então ele é convertido a inteiro
-1. Se o valor de `expr` estiver entre 1 e (número de parâmetros - 1), então
-`switch()` retorna o valor do parâmetro correspondente.
-1. Do contrário, `switch()` retorna `NULL`
+<!-- 1. Se o tipo de `expr` não for inteiro, então ele é convertido a inteiro -->
+<!-- 1. Se o valor de `expr` estiver entre 1 e (número de parâmetros - 1), então -->
+<!-- `switch()` retorna o valor do parâmetro correspondente. -->
+<!-- 1. Do contrário, `switch()` retorna `NULL` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- 1
-switch(opção, 10, 20, 30, 40)
-opção <- 2
-switch(opção, 10, 20, 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- 1 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 2 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- 3
-switch(opção, 10, 20, 30, 40)
-opção <- 4
-switch(opção, 10, 20, 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- 3 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 4 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- 0
-switch(opção, 10, 20, 30, 40)
-opção <- -1
-switch(opção, 10, 20, 30, 40)
-opção <- 200
-switch(opção, 10, 20, 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- 0 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- -1 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 200 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- .5
-switch(opção, 10, 20, 30, 40)
-opção <- .6
-switch(opção, 10, 20, 30, 40)
-opção <- .9
-switch(opção, 10, 20, 30, 40)
-opção <- 1.1
-switch(opção, 10, 20, 30, 40)
-opção <- exp(1)
-switch(opção, 10, 20, 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- .5 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- .6 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- .9 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 1.1 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- exp(1) -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- TRUE
-switch(opção, 10, 20, 30, 40)
-opção <- FALSE
-switch(opção, 10, 20, 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- TRUE -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- FALSE -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- "2"  # não há um "2" entre os parâmetros
-switch(opção, x = 10, y = 20, z = 30, 40)
-opção <- 2    # pega o segundo parâmetro, viz., "y"
-switch(opção, x = 10, y = 20, z = 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- "2"  # não há um "2" entre os parâmetros -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- opção <- 2    # pega o segundo parâmetro, viz., "y" -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- ``` -->
 
 
 
-## Função `switch()`
+<!-- ## Função `switch()` -->
 
-Exemplos:
+<!-- Exemplos: -->
 
-```{r}
-opção <- "20"  # não há um "20" entre os parâmetros
-switch(opção, x = 10, y = 20, z = 30, 40)
-opção <- 20    # não há 21 parâmetros
-switch(opção, x = 10, y = 20, z = 30, 40)
-```
+<!-- ```{r} -->
+<!-- opção <- "20"  # não há um "20" entre os parâmetros -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- opção <- 20    # não há 21 parâmetros -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- ``` -->
 
 
 
