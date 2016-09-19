@@ -22,36 +22,36 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## O que veremos
 
-1. Tipos e Estruturas de Dados em R 
-2. Programação em R
+1. [Tipos e Estruturas de Dados em R](#5)
+1. [Programação em R](#117)
 
 
 
 ## O que veremos
 
 1. Tipos e Estruturas de Dados em R 
-    1. Tipos de Dados
-    2. Estruturas de Dados
-    3. Atributos
-    4. “Não-dados”
-2. Programação em R
+    1. [Tipos de Dados](#6)
+    1. [Estruturas de Dados](#30)
+    1. [Atributos](#85)
+    1. [“Não-dados”](#107)
+1. Programação em R
 
 
 
 ## O que veremos
 
 1. Tipos e estruturas de dados em R 
-2. Programação em R
-    1. *Scripts*
-    1. Comentários
-    1. Funções
-    1. Operadores de Atribuição
-    2. Operadores de Indexação
-    2. Operações e Funções Matemáticas
-    2. Operações e Funções de Comparação
-    2. Operações e Funções Lógicas
-    3. Instruções de Repetições
-    4. Instruções de Execução Condicional
+1. Programação em R
+    1. [*Scripts*](#119)
+    1. [Comentários](#122)
+    1. [Funções](#125)
+    1. [Operadores de Atribuição](#157)
+    1. [Operadores de Indexação](#160)
+    1. [Operações e Funções Matemáticas](#247)
+    1. [Operações e Funções de Comparação](#263)
+    1. [Operações e Funções Lógicas](#267)
+    1. [Instruções de Repetições](#274)
+    1. [Instruções de Execução Condicional](#299)
 
 
 
