@@ -2671,13 +2671,13 @@ serem somados.
 
 ## Operações e Funções de Comparação
 
-1. `<`
-1. `<=`
-1. `>`
-1. `>=`
-1. `==`
-1. `!=`
-1. `%in%`
+1. `<` -- menor que
+1. `<=` -- menor que ou igual a
+1. `>` -- maior que
+1. `>=` -- maior que ou igual a
+1. `==` -- igual a
+1. `!=` -- diferente de 
+1. `%in%` -- pertence a 
 
 
 
@@ -2745,16 +2745,18 @@ all(c(T, F))
 
 Ordem decrescente de precedência entre operadores
 
-|                          |                                          |
-|:-------------------------+:-----------------------------------------|
-| 1) `$`                   |   8) `+` e `-` binários                  |
-| 2) `[]` e `[[]]`         |   9) `<`, `>`, `<=`, `>=`, `==` e `!=`   |
-| 3) `^`                   |  10) `!`                                 |
-| 4) `-` e `+` unários     |  11) `&` e `&&`                          |
-| 5) `:`                   |  12) `|` e `||`                          |
-| 6) `%%` e `%/%`          |  13) `->`                                |
-| 7) `*` e `/`             |  14) `<-`                                |
+|                       |                                          |
+|:----------------------+:-----------------------------------------|
+| 1) `$`                |   8) `+` e `-` binários                  |
+| 2) `[]` e `[[]]`      |   9) `<`, `>`, `<=`, `>=`, `==` e `!=`   |
+| 3) `^`                |  10) `!`                                 |
+| 4) `-` e `+` unários  |  11) `&` e `&&`                          |
+| 5) `:`                |  12) `|` e `||`                          |
+| 6) `%%` e `%/%`^1^    |  13) `->`                                |
+| 7) `*` e `/`          |  14) `<-`                                |
 
+^1^ Na verdade, entram nesse nível de precedência todos os operadores que 
+começam com e terminam em `%`, como o `%>%`, que veremos mais a diante no curso.
 
 
 ## Exemplos de aplicação
