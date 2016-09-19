@@ -2710,14 +2710,14 @@ serem somados.
 
 ## Operações e Funções Lógicas
 
-1. `!`
-1. `&`
-1. `&&`
-1. `|`
-1. `||`
-1. `xor()`
-1. `any()`
-1. `all()`
+1. `!` -- negação lógica
+1. `&` -- operador lógico "E" vetorial
+1. `&&` -- operador lógico "E" atômico
+1. `|` -- operador lógico "OU" vetorial
+1. `||` -- operador lógico "OU" atômico
+1. `xor()` -- operador lógico "OU exclusivo" vetorial
+1. `any()` -- retorna `TRUE` se algum valor for `TRUE` e `FALSE` caso contrário
+1. `all()` -- retorna `TRUE` se todos os valores forem `TRUE` e `FALSE` caso contrário
 
 
 
