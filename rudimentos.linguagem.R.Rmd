@@ -49,12 +49,12 @@ knitr::opts_chunk$set(echo = FALSE)
     1. [Comentários](#122)
     1. [Funções](#125)
     1. [Operadores de Atribuição](#157)
-    1. [Operadores de Indexação](#160)
-    1. [Operações e Funções Matemáticas](#247)
-    1. [Operações e Funções de Comparação](#263)
-    1. [Operações e Funções Lógicas](#267)
-    1. [Instruções de Repetições](#274)
-    1. [Instruções de Execução Condicional](#299)
+    1. [Operadores de Indexação](#163)
+    1. [Operações e Funções Matemáticas](#250)
+    1. [Operações e Funções de Comparação](#266)
+    1. [Operações e Funções Lógicas](#270)
+    1. [Instruções de Repetições](#277)
+    1. [Instruções de Execução Condicional](#302)
 
 
 
@@ -1618,9 +1618,44 @@ dentro dos parênteses.
 
 ## Operadores de Atribuição
 
-Como já vimos, o operador `<-` associa um objeto do R a um nome.
+Como já vimos, o operador `<-` associa um objeto do R a um nome válido.
 
-Mas há também o operador `->`
+Um nome válido, no `R`, é uma sequência de caracteres tais que:
+
+1. começa ou por uma letra ou pelo símbolo `"."` (ponto) ou pelo símbolo `"_"` 
+(sublinhado).
+1. pode ser seguido por letras, dígitos ou pelos símbolos `"."` e `"_"` (mas isso é opcional).
+
+
+
+## Operadores de Atribuição
+
+- O `R` considera como diferentes a versão maiúscula e a versão minúscula das letras.
+    - Assim, `"X"` e `"x"` são nomes diferentes, da mesma forma como são nomes diferentes `"opção"`, `"Opção"`, `"OPÇÃO"` e `"OpÇãO"`.
+- Conselho: Apesar de ser possível, prefira não usar `"."` e nem `"_"` como 
+nomes.  
+    - Há diversos motivos para esse conselho.
+
+
+
+## Operadores de Atribuição
+
+Exemplos de nomes válidos:
+
+- `x`, `y`, `x1`, `x.1`, `x_1`, `x2.3_a.z`, 
+- `compensação`, `é`, `.1a.escolha`
+- `opçãomenu`, `opção.menu`, `opçãoMenu`
+
+Exemplos de nómes inválidos:
+
+- `2a.escolha` -- começa por um dígito
+- `1L` -- na verdade, é um número inteiro
+- `opção-2` -- o `R` compreende como a diferença entre `opção` e 2
+
+
+## Operadores de Atribuição
+
+Além do operador `<-`, há também o operador `->`
 
 ```{r 12, eval=FALSE}
 x <- 2
@@ -2763,13 +2798,13 @@ necessário.
 
 A sintaxe da instrução `for` é
 
-```
+```{r, eval=FALSE}
 for (variável in sequência) expressão
 ```
 
 Se houver mais de a expressão, use `{}`
 
-```
+```{r, eval=FALSE}
 for (variável in sequência) {expressão; ...; expressão}
 ```
 
@@ -2780,7 +2815,7 @@ for (variável in sequência) {expressão; ...; expressão}
 Quebrar a instrução em mais de uma linha geralmente aumenta a legibilidade do 
 seu código.
 
-```
+```{r, eval=FALSE}
 for (variável in sequência) 
     expressão
 
@@ -3097,8 +3132,578 @@ for (k in 1:10)
 ## Instruções de Execução Condicional
 
 1. As instruções `if` e `else`
-2. A função `ifelse()`
-2. A função `switch()`
+1. A função `ifelse()`
+<!-- 1. A função `switch()` -->
 
-**AQUI!!!** Um slide para cada um desses
+
+
+## Instrução `if`
+
+A instrução `if` serve para executar um trecho de código somente se uma condição 
+(uma expressão em `R` que retorne um único valor lógico) for verdadeira.
+
+A sintaxe da instrução `if` é
+
+```{r, eval=FALSE}
+if (condição) expressão
+```
+
+Se houver mais de a expressão, use `{}`
+
+```{r, eval=FALSE}
+if (condição) {expressão; ...; expressão}
+```
+
+
+
+## Instrução `if`
+
+Assim como com a instrução `for`, quebrar a instrução em mais de uma linha 
+geralmente aumenta a legibilidade do seu código.
+
+```{r, eval=FALSE}
+if (condição) 
+    expressão
+
+if (condição) {
+    expressão
+    ...
+    expressão
+}
+```
+
+
+
+## Instrução `if`
+
+Tente executar o seguinte código:
+
+```{r 18a, eval=F}
+if (2 < 3) print("2 é menor que 3")
+```
+
+
+
+## Instrução `if`
+
+Deve ter dado este resultado:
+
+```{r 18a}
+```
+
+
+
+## Instrução `if`
+
+Agora, tente executar o seguinte código:
+
+```{r 18b, eval=F}
+if (2 > 3) print("2 é maior que 3")
+```
+
+
+
+## Instrução `if`
+
+Deve ter dado este resultado:
+
+```{r 18b}
+```
+
+
+
+## Instrução `if`
+
+Deve ter dado este resultado:
+
+```{r 18b}
+```
+
+Sim, é isso aí: não gerou resultado nenhum.
+
+Adivinha porquê?
+
+Porque não executou código nenhum.
+
+
+
+## Instruções `if` e `else`
+
+As instruções `if` e `else` usadas em conjunto permitem executar ou um trecho de código se a condição for verdadeira ou outro trecho de código se a condição for falsa
+
+A sintaxe da instrução `if` é
+
+```{r, eval=FALSE}
+if (condição) expressão1 else expressão2
+```
+
+Se houver mais de a expressão, use `{}`
+
+```{r, eval=FALSE}
+if (condição) {expressão; ...; expressão} else {expressão; ...; expressão} 
+```
+
+
+
+## Instruções `if` e `else`
+
+Claro, quebrar a instrução em mais de uma linha geralmente aumenta a 
+legibilidade do seu código.
+
+Contudo há um **grande** restrição no uso da instrução `else` em uma linha diferente 
+da linha da instrução `if`.
+
+**ATENÇÃO**: Isso pode fazer o seu *script* dar um pau do qual você dificilmente 
+desconfiará.
+
+- Não diga que eu não avisei
+
+
+
+## Instruções `if` e `else`
+
+Vamos aprender por tentativa e erro.
+
+Vamos tentar e **errar**.
+
+
+
+## Instruções `if` e `else`
+
+Tente executar o seguinte código:
+
+```{r 18c, eval=F}
+if (2 < 3) print("2 é menor que 3") else print("2 é maior que ou igual a 3")
+```
+
+
+
+## Instruções `if` e `else`
+
+Deve ter dado o seguinte resultado:
+
+```{r 18c}
+```
+
+
+
+## Instruções `if` e `else`
+
+Ok.  Agora, tente executar o seguinte código:
+
+```{r 18d, eval=F}
+if (2 > 3) print("2 é maior que 3") else print("2 é menor que ou igual a 3")
+```
+
+
+
+## Instruções `if` e `else`
+
+Deve ter dado o seguinte resultado:
+
+```{r 18d}
+```
+
+
+
+## Instruções `if` e `else`
+
+Legal.  Agora, vamos tentar separar esse `if` em mais de uma linha.
+
+*Spoiler* de *GoT*: vai dar erro.
+
+Tente executar o seguinte código:
+
+```{r 18e, eval=F}
+if (2 < 3) 
+    print("2 é menor que 3") 
+else 
+    print("2 é maior que ou igual a 3")
+```
+
+
+
+## Instruções `if` e `else`
+
+Deve ter dado o seguinte erro:
+
+```{r 18e, warning=T, error=T}
+```
+
+
+
+## Instruções `if` e `else`
+
+Agora, tente esta versão:
+
+```{r 18f, eval=F}
+if (2 < 3) {
+    print("2 é menor que 3") 
+} else {
+    print("2 é maior que ou igual a 3")
+}
+```
+
+
+
+## Instruções `if` e `else`
+
+Deve ter dado este resultado:
+
+```{r 18f}
+```
+
+
+
+## Instruções `if` e `else`
+
+Só de sacanagem, vamos tentar esta versão:
+
+```{r 18g, eval=F}
+if (2 < 3) {
+    print("2 é menor que 3") 
+} 
+else {
+    print("2 é maior que ou igual a 3")
+}
+```
+
+
+
+## Instruções `if` e `else`
+
+Deve ter dado este erro:
+
+```{r 18g, warning=TRUE, error=TRUE}
+```
+
+
+
+## Instruções `if` e `else`
+
+O jeito mais seguro de executar a instrução `if` com a instrução `else` 
+correspondente em uma outra linha é
+
+```{r, eval=FALSE}
+if (condição) {
+    expressão
+} else {
+    expressão
+}
+```
+
+Faça isso **sempre**.
+
+
+
+## Instruções `if` e `else`
+
+"Ok, Marcelo, eu prometo que eu vou fazer isso sempre."
+
+"Mas você poderia explicar por que esse erro misterioso acontece?"
+
+Claro que posso!
+
+Que bom que vocês perguntaram!
+
+=D
+
+
+
+## Instruções `if` e `else`
+
+Note que a instrução `if`, na realidade, é uma expressão!
+
+```{r}
+if (T) 2 else 3
+if (F) 2 else 3
+```
+
+
+
+## Instruções `if` e `else`
+
+Na verdade, dá para fazer isto:
+
+```{r}
+x <- (if (T) 2 else 3)
+x
+y <- (if (F) 2 else 3)
+y
+```
+
+
+
+## Instruções `if` e `else`
+
+Na verdade mesmo, dá para fazer até mesmo isto:
+
+```{r}
+x <- (if (T) 2)
+x
+y <- (if (F) 2)
+y
+```
+
+E é aí que mora o problema!
+
+
+
+## Instruções `if` e `else`
+
+O `R` só procura por uma continuação de uma expressão na próxima linha se a 
+expressão não parecer concluída.
+
+Um `if` sem `else` faz sentido o suficiente para a expressão ser considerada 
+completa até o final da linha, logo o `R` conclui que a expressão está completa.
+
+Daí, o `R` não entende o porquê de a linha seguinte começar por um `else`, que, 
+para ele, parece solto.
+
+E isso não ocorre com a sintaxe segura.
+
+Daí criar o costume de usar essa sintaxe sempre.
+
+=)
+
+
+
+## Função `ifelse()`
+
+As instruções `if` e `else` são bem legais, mas só funcionam com um único valor 
+lógico, e não com um vetor de lógicos.
+
+```{r}
+if (c(T, T, F, F)) 1 else 2
+if (c(F, F, T, T)) 1 else 2
+```
+
+
+
+## Função `ifelse()`
+
+Teria sido legal 
+
+- se `if (c(T, T, F, F)) 1 else 2` retornasse `c(1, 1, 2, 2)` e 
+- se `if (c(F, F, T, T)) 1 else 2` retornasse `c(2, 2, 1, 1)`
+
+É aí que entra a função `ifelse()`
+
+```{r}
+ifelse(c(T, T, F, F), 1, 2)
+ifelse(c(F, F, T, T), 1, 2)
+```
+
+
+
+## Função `ifelse()`
+
+A sintaxe da função `ifelse()` é
+
+```{r, eval=FALSE}
+ifelse(vetor.lógico, vetor.valores.se.T, vetor.valores.se.F)
+```
+
+em que os vetores `vetor.lógico`, `vetor.valores.se.T` e `vetor.valores.se.F` 
+têm que ter o mesmo comprimento ou então vão ser reciclados em função do 
+comprimento de `vetor.lógico`.
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- A função `switch()` tem as seguintes sintaxes: -->
+
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n) -->
+
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else) -->
+
+<!-- switch(expr, expr_1, expr_2, ..., expr_n) -->
+<!-- ``` -->
+
+<!-- As duas primeiras sintaxes só funcionam se `expr` for do tipo texto. -->
+
+<!-- A última sintaxe funciona se `expr` for de qualquer outro tipo que não texto. -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- As duas primeiras sintaxes só funcionam se `expr` for do tipo texto. -->
+
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n) -->
+
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else) -->
+<!-- ``` -->
+
+<!-- - Nesse caso, o primeiro parâmetro não é nomeado e, opcionalmente, o último  -->
+<!-- parâmetro também pode não ser nomeado.   -->
+<!-- - Fora esses dois parâmetros, todos os demais têm que ser parâmetros nomeados.   -->
+<!-- - Caso o nome dos parâmetros sejam nomes válidos de variáveis, então as aspas  -->
+<!-- podem ser dispensadas. -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- As duas primeiras sintaxes só funcionam se `expr` for do tipo texto. -->
+
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n) -->
+
+<!-- switch(expr, "valor_1" = expr_1, "valor_2" = expr_2, ...,"valor_n" = expr_n, expr_else) -->
+<!-- ``` -->
+
+<!-- 1. Se o valor de `expr` for igual a um dos nomes `valor_1`, `valor_2` etc. ou  -->
+<!-- `valor_n`, então `switch()` retornará o valor da expressão `expr_1`, `expr_2`  -->
+<!-- etc. ou `expr_n` -->
+<!-- 1. Se o valor de `expr` não for igual a nenhum dos nomes `valor_1`, `valor_2`  -->
+<!-- etc. ou `valor_n`, então `switch()` procura por um último parâmetro `expr_else`  -->
+<!-- sem nome -->
+<!--     1. Se houver, então `switch()` retorna o seu valor -->
+<!--     1. Se não houver, então `switch()` retorna `NULL` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- "x" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- opção <- "y" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- "z" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- opção <- "w" -->
+<!-- switch(opção, x = 1, y = 2, z = 3, 4) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- A última sintaxe funciona se `expr` for de qualquer outro tipo que não texto. -->
+
+<!-- ```{r, eval=FALSE} -->
+<!-- switch(expr, expr_1, expr_2, ..., expr_n) -->
+<!-- ``` -->
+
+<!-- 1. Se o tipo de `expr` não for inteiro, então ele é convertido a inteiro -->
+<!-- 1. Se o valor de `expr` estiver entre 1 e (número de parâmetros - 1), então  -->
+<!-- `switch()` retorna o valor do parâmetro correspondente. -->
+<!-- 1. Do contrário, `switch()` retorna `NULL` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- 1 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 2 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- 3 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 4 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- 0 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- -1 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 200 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- .5 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- .6 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- .9 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- 1.1 -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- exp(1) -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- TRUE -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- opção <- FALSE -->
+<!-- switch(opção, 10, 20, 30, 40) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- "2"  # não há um "2" entre os parâmetros -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- opção <- 2    # pega o segundo parâmtro, viz., "y" -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- ``` -->
+
+
+
+<!-- ## Função `switch()` -->
+
+<!-- Exemplos: -->
+
+<!-- ```{r} -->
+<!-- opção <- "20"  # não há um "20" entre os parâmetros -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- opção <- 20    # não há 21 parâmtros -->
+<!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
+<!-- ``` -->
+
+
 
