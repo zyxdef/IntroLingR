@@ -2650,7 +2650,7 @@ sum
 
 ## Operações e Funções Matemáticas
 
-Note que o \` (backtick, aspa simples reversa, ou tique) serve para fazer 
+Note que o \` (*backtick*, aspa simples reversa ou tique) serve para fazer 
 referência ao símbolo `+`.  Sem ele, o R daria erro por falta dos valores a 
 serem somados.
 
@@ -2703,6 +2703,35 @@ serem somados.
 
 
 
+## Operações e Funções de Comparação
+
+Infelizmente, uma expressão tal como 
+```{r, eval=FALSE}
+20 <= idades <= 30
+```
+não retornaria 
+```{r, echo=FALSE}
+20 <= idades & idades <= 30
+```
+como esperado, mas sim
+```{r, error=TRUE}
+20 <= idades <= 30
+```
+
+
+
+## Operações e Funções de Comparação
+
+Por que isso ocorre?
+
+Porque `21 <= idades <= 25` na verdade precisaria ser 
+```{r}
+21 <= idades & idades <= 25
+```
+como veremos na próxima seção.
+
+
+
 
 
 # Operações e Funções Lógicas
@@ -2718,7 +2747,8 @@ serem somados.
 1. `||` -- operador lógico "OU" atômico
 1. `xor()` -- operador lógico "OU exclusivo" vetorial
 1. `any()` -- retorna `TRUE` se algum valor for `TRUE` e `FALSE` caso contrário
-1. `all()` -- retorna `TRUE` se todos os valores forem `TRUE` e `FALSE` caso contrário
+1. `all()` -- retorna `TRUE` se todos os valores forem `TRUE` e `FALSE` caso 
+contrário
 
 
 
@@ -2735,10 +2765,59 @@ xor(c(T, T, F, F), c(T, F, T, F))
 
 ## Operações e Funções Lógicas
 
+A diferença entre os operadores de comparação vetoriais e os atômicos
+
+```{r}
+c(T, T, F, F) & c(T, F, T, F)
+c(T, T, F, F) && c(T, F, T, F)
+```
+
+
+
+## Operações e Funções Lógicas
+
+```{r, eval=FALSE}
+vetor1 && vetor2
+```
+é a mesma coisa que 
+```{r, eval=FALSE}
+vetor1[1] & vetor2[1]
+```
+e 
+```{r, eval=FALSE}
+vetor1 || vetor2
+```
+é a mesma coisa que
+```{r, eval=FALSE}
+vetor1[1] | vetor2[1]
+```
+
+
+
+## Operações e Funções Lógicas
+
 ```{r}
 any(c(T, F))
 all(c(T, F))
 ```
+
+
+
+## Voltando ao exemplo "`20 <= idades <= 30`"
+
+Como vimos, `20 <= idades` e `idades <= 30` retornam um vetor lógico cada um, 
+os quais são combinados posição a posição pelo operador lógico `&` vetorial
+
+```{r}
+idades
+20 <= idades; idades <= 30; 20 <= idades & idades <= 30
+```
+
+
+
+
+
+# Ordem de Precedência
 
 
 
@@ -3074,7 +3153,7 @@ mas **eu** desaconselho vocês as usarem até terem mais experiência com R.
         - repete *expressão* para todo o sempre
             - a menos que um `break` seja executado
 1. `break`
-    - interrompe um *loop* e vai para a próxima expressão
+    - interrompe o *loop* e vai para a expressão seguinte
 1. `next`
     - vai para a próxima iteração
 
@@ -3085,11 +3164,11 @@ mas **eu** desaconselho vocês as usarem até terem mais experiência com R.
 Um exemplo de *loop* com `while`
 
 ```{r, eval=FALSE}
-resposta <- readline(prompt = "Qual é a sua resposta?")
-while (resposta!=42)
+resposta <- 0
+while (resposta != 42)
 {
-  print("A resposta tem que ser 42");
-  response <- readline(prompt = "Qual é a sua resposta?")
+  print("A resposta tem que ser 42")
+  resposta <- readline(prompt = "Qual é a sua resposta?")
 } 
 ```
 
@@ -3102,7 +3181,7 @@ O mesmo *loop* com `repeat` e `break`
 ```{r, eval=FALSE}
 repeat
 {
-  response <- readline(prompt = "Qual é a sua resposta?")
+  resposta <- readline(prompt = "Qual é a sua resposta?")
   if (resposta == 42)
       break
   print("A resposta tem que ser 42");
@@ -3113,12 +3192,29 @@ repeat
 
 ## Outras Instruções de *Loop*
 
-Um exemplo com `next`
+Um exemplo com `repeat`, `break` e `next`
 
 ```{r}
-for (k in 1:10)
-{
-    if (k %% 2)
+k <- 0
+repeat {
+    k <-  k + 1
+    if (k > 10)
+        break
+    if (k %% 2 == 1)
+        next
+    print(k)
+}
+```
+
+
+
+## Outras Instruções de *Loop*
+
+Com a instrução `for `, o exemplo ficaria
+
+```{r}
+for (k in 1:10) {
+    if (k %% 2 == 1)
         next
     print(k)
 }

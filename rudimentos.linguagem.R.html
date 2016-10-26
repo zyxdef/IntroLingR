@@ -75,6 +75,7 @@
   </style>
 
 
+
 </head>
 
 <body style="opacity: 0">
@@ -2827,7 +2828,7 @@ idades[c(T, T, F, F, T, T, F, F, T, T, F, F)] # idade tem 8 elementos</pre>
 
 </article></slide><slide class=''><hgroup><h2>Operações e Funções Matemáticas</h2></hgroup><article  id="operacoes-e-funcoes-matematicas-2">
 
-<p>Note que o ` (backtick, aspa simples reversa, ou tique) serve para fazer referência ao símbolo <code>+</code>. Sem ele, o R daria erro por falta dos valores a serem somados.</p>
+<p>Note que o ` (<em>backtick</em>, aspa simples reversa ou tique) serve para fazer referência ao símbolo <code>+</code>. Sem ele, o R daria erro por falta dos valores a serem somados.</p>
 
 <pre class = 'prettyprint lang-r'>`+`</pre>
 
@@ -2885,6 +2886,36 @@ idades[c(T, T, F, F, T, T, F, F, T, T, F, F)] # idade tem 8 elementos</pre>
 
 <pre >##  [1] FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</pre>
 
+</article></slide><slide class=''><hgroup><h2>Operações e Funções de Comparação</h2></hgroup><article  id="operacoes-e-funcoes-de-comparacao-4">
+
+<p>Infelizmente, uma expressão tal como</p>
+
+<pre class = 'prettyprint lang-r'>20 &lt;= idades &lt;= 30</pre>
+
+<p>não retornaria</p>
+
+<pre >## [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE</pre>
+
+<p>como esperado, mas sim</p>
+
+<pre class = 'prettyprint lang-r'>20 &lt;= idades &lt;= 30</pre>
+
+<pre >## Error: &lt;text&gt;:1:14: &#39;&lt;=&#39; inesperado
+## 1: 20 &lt;= idades &lt;=
+##                  ^</pre>
+
+</article></slide><slide class=''><hgroup><h2>Operações e Funções de Comparação</h2></hgroup><article  id="operacoes-e-funcoes-de-comparacao-5">
+
+<p>Por que isso ocorre?</p>
+
+<p>Porque <code>21 &lt;= idades &lt;= 25</code> na verdade precisaria ser</p>
+
+<pre class = 'prettyprint lang-r'>21 &lt;= idades &amp; idades &lt;= 25</pre>
+
+<pre >## [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE</pre>
+
+<p>como veremos na próxima seção.</p>
+
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Operações e Funções Lógicas</h2></hgroup><article  id="operacoes-e-funcoes-logicas">
 
 </article></slide><slide class=''><hgroup><h2>Operações e Funções Lógicas</h2></hgroup><article  id="operacoes-e-funcoes-logicas-1">
@@ -2920,6 +2951,34 @@ idades[c(T, T, F, F, T, T, F, F, T, T, F, F)] # idade tem 8 elementos</pre>
 
 </article></slide><slide class=''><hgroup><h2>Operações e Funções Lógicas</h2></hgroup><article  id="operacoes-e-funcoes-logicas-3">
 
+<p>A diferença entre os operadores de comparação vetoriais e os atômicos</p>
+
+<pre class = 'prettyprint lang-r'>c(T, T, F, F) &amp; c(T, F, T, F)</pre>
+
+<pre >## [1]  TRUE FALSE FALSE FALSE</pre>
+
+<pre class = 'prettyprint lang-r'>c(T, T, F, F) &amp;&amp; c(T, F, T, F)</pre>
+
+<pre >## [1] TRUE</pre>
+
+</article></slide><slide class=''><hgroup><h2>Operações e Funções Lógicas</h2></hgroup><article  id="operacoes-e-funcoes-logicas-4">
+
+<pre class = 'prettyprint lang-r'>vetor1 &amp;&amp; vetor2</pre>
+
+<p>é a mesma coisa que</p>
+
+<pre class = 'prettyprint lang-r'>vetor1[1] &amp; vetor2[1]</pre>
+
+<p>e</p>
+
+<pre class = 'prettyprint lang-r'>vetor1 || vetor2</pre>
+
+<p>é a mesma coisa que</p>
+
+<pre class = 'prettyprint lang-r'>vetor1[1] | vetor2[1]</pre>
+
+</article></slide><slide class=''><hgroup><h2>Operações e Funções Lógicas</h2></hgroup><article  id="operacoes-e-funcoes-logicas-5">
+
 <pre class = 'prettyprint lang-r'>any(c(T, F))</pre>
 
 <pre >## [1] TRUE</pre>
@@ -2928,7 +2987,25 @@ idades[c(T, T, F, F, T, T, F, F, T, T, F, F)] # idade tem 8 elementos</pre>
 
 <pre >## [1] FALSE</pre>
 
-</article></slide><slide class=''><hgroup><h2>Ordem de Precedência</h2></hgroup><article  id="ordem-de-precedencia">
+</article></slide><slide class=''><hgroup><h2>Voltando ao exemplo &quot;<code>20 &lt;= idades &lt;= 30</code>&quot;</h2></hgroup><article  id="voltando-ao-exemplo-20-idades-30">
+
+<p>Como vimos, <code>20 &lt;= idades</code> e <code>idades &lt;= 30</code> retornam um vetor lógico cada um, os quais são combinados posição a posição pelo operador lógico <code>&amp;</code> vetorial</p>
+
+<pre class = 'prettyprint lang-r'>idades</pre>
+
+<pre >## [1] 20 23 18 39 32 27 19 35</pre>
+
+<pre class = 'prettyprint lang-r'>20 &lt;= idades; idades &lt;= 30; 20 &lt;= idades &amp; idades &lt;= 30</pre>
+
+<pre >## [1]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE</pre>
+
+<pre >## [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE</pre>
+
+<pre >## [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE</pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ordem de Precedência</h2></hgroup><article  id="ordem-de-precedencia">
+
+</article></slide><slide class=''><hgroup><h2>Ordem de Precedência</h2></hgroup><article  id="ordem-de-precedencia-1">
 
 <p>Ordem decrescente de precedência entre operadores</p>
 
@@ -3263,7 +3340,7 @@ for (variável in sequência) {
 ##     attr(value, &quot;class&quot;) &lt;- &quot;data.frame&quot;
 ##     value
 ## }
-## &lt;bytecode: 0x21c6238&gt;
+## &lt;bytecode: 0x2511940&gt;
 ## &lt;environment: namespace:base&gt;</pre>
 
 </article></slide><slide class=''><hgroup><h2>Exemplo de Aplicação</h2></hgroup><article  id="exemplo-de-aplicacao-3">
@@ -3454,7 +3531,7 @@ for (variável in sequência) {
 <li><code>break</code>
 
 <ul>
-<li>interrompe um <em>loop</em> e vai para a próxima expressão</li>
+<li>interrompe o <em>loop</em> e vai para a expressão seguinte</li>
 </ul></li>
 <li><code>next</code>
 
@@ -3467,11 +3544,11 @@ for (variável in sequência) {
 
 <p>Um exemplo de <em>loop</em> com <code>while</code></p>
 
-<pre class = 'prettyprint lang-r'>resposta &lt;- readline(prompt = &quot;Qual é a sua resposta?&quot;)
-while (resposta!=42)
+<pre class = 'prettyprint lang-r'>resposta &lt;- 0
+while (resposta != 42)
 {
-  print(&quot;A resposta tem que ser 42&quot;);
-  response &lt;- readline(prompt = &quot;Qual é a sua resposta?&quot;)
+  print(&quot;A resposta tem que ser 42&quot;)
+  resposta &lt;- readline(prompt = &quot;Qual é a sua resposta?&quot;)
 } </pre>
 
 </article></slide><slide class=''><hgroup><h2>Outras Instruções de <em>Loop</em></h2></hgroup><article  id="outras-instrucoes-de-loop-3">
@@ -3480,7 +3557,7 @@ while (resposta!=42)
 
 <pre class = 'prettyprint lang-r'>repeat
 {
-  response &lt;- readline(prompt = &quot;Qual é a sua resposta?&quot;)
+  resposta &lt;- readline(prompt = &quot;Qual é a sua resposta?&quot;)
   if (resposta == 42)
       break
   print(&quot;A resposta tem que ser 42&quot;);
@@ -3488,11 +3565,30 @@ while (resposta!=42)
 
 </article></slide><slide class=''><hgroup><h2>Outras Instruções de <em>Loop</em></h2></hgroup><article  id="outras-instrucoes-de-loop-4">
 
-<p>Um exemplo com <code>next</code></p>
+<p>Um exemplo com <code>repeat</code>, <code>break</code> e <code>next</code></p>
 
-<pre class = 'prettyprint lang-r'>for (k in 1:10)
-{
-    if (k %% 2)
+<pre class = 'prettyprint lang-r'>k &lt;- 0
+repeat {
+    k &lt;-  k + 1
+    if (k &gt; 10)
+        break
+    if (k %% 2 == 1)
+        next
+    print(k)
+}</pre>
+
+<pre >## [1] 2
+## [1] 4
+## [1] 6
+## [1] 8
+## [1] 10</pre>
+
+</article></slide><slide class=''><hgroup><h2>Outras Instruções de <em>Loop</em></h2></hgroup><article  id="outras-instrucoes-de-loop-5">
+
+<p>Com a instrução <code>for</code>, o exemplo ficaria</p>
+
+<pre class = 'prettyprint lang-r'>for (k in 1:10) {
+    if (k %% 2 == 1)
         next
     print(k)
 }</pre>
