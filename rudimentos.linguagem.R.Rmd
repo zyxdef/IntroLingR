@@ -682,7 +682,7 @@ de ser por linhas, mas isso pode ser mudado.
 ## Matrizes e *Arrays*
 
 Assim, como os vetores, os valores de uma matriz e *array* têm que ser do mesmo 
-tipo ou então eles são forçados por regras de coreção.
+tipo ou então eles são forçados por regras de coerção.
 
 ```{r 7d, eval=FALSE}
 array(c(1, 2, 3, "A"), dim = c(2,2))
@@ -693,7 +693,7 @@ array(c(1, 2, 3, "A"), dim = c(2,2))
 ## Matrizes e *Arrays*
 
 Assim, como os vetores, os valores de uma matriz e *array* têm que ser do mesmo 
-tipo ou então eles são forçados por regras de coreção.
+tipo ou então eles são forçados por regras de coerção.
 
 ```{r 7d}
 ```
@@ -1617,12 +1617,12 @@ Como já vimos, o operador `<-` associa um objeto a um *nome válido*.
 
 Um nome válido no `R` é uma sequência de um ou mais caracteres tais que:
 
-1. o primeiro caracter pode ser uma letra ou o símbolo `"."` (ponto)
-1. o segundo caracter (se houver) pode ser uma letra, o símbolo `"."` (ponto) 
+1. o primeiro caractere pode ser uma letra ou o símbolo `"."` (ponto)
+1. o segundo caractere (se houver) pode ser uma letra, o símbolo `"."` (ponto) 
 ou o símbolo `"_"` (sublinhado)
-    - se o primeiro caracter não for `"."` (ponto), o segundo caracter também 
+    - se o primeiro caractere não for `"."` (ponto), o segundo caractere também 
     poderá ser um dígito
-1. do terceiro caracter em diante (se houver), ele pode ser letra, dígito ou os 
+1. do terceiro caractere em diante (se houver), ele pode ser letra, dígito ou os 
 símbolos `"."` e `"_"` 
 
 
@@ -1665,7 +1665,7 @@ Exemplos de nomes válidos:
 - `compensação`, `é`
 - `opçãomenu`, `opção.menu`, `opçãoMenu`
 
-Exemplos de nómes inválidos:
+Exemplos de nomes inválidos:
 
 - `1a.escolha` -- começa por um dígito
 - `.2a.escolha` -- começa por ponto seguido de dígito
@@ -2608,7 +2608,7 @@ Boa parte das funções matemáticas básicas estão disponíveis no R e são
 vetorizadas.
 
 1. Função exponencial `exp()` 
-1. Funções logaritmicas `log()`, `log10()` e `log2()`
+1. Funções logarítmicas `log()`, `log10()` e `log2()`
 1. Funções gerais `abs()`, `sign()` e `sqrt()`
 1. Funções de arredondamento/truncamento: `floor()`, `ceiling()`, `trunc()`, 
 `round()`, `signif()`
@@ -3839,6 +3839,5 @@ comprimento de `vetor.lógico`.
 <!-- opção <- 20    # não há 21 parâmetros -->
 <!-- switch(opção, x = 10, y = 20, z = 30, 40) -->
 <!-- ``` -->
-
 
 
