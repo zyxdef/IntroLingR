@@ -1609,23 +1609,51 @@ dentro dos parênteses.
 
 ## Operadores de Atribuição
 
-Como já vimos, o operador `<-` associa um objeto do R a um nome válido.
+Como já vimos, o operador `<-` associa um objeto a um *nome válido*.
 
-Um nome válido, no `R`, é uma sequência de caracteres tais que:
 
-1. começa ou por uma letra ou pelo símbolo `"."` (ponto) ou pelo símbolo `"_"` 
-(sublinhado).
-1. pode ser seguido por letras, dígitos ou pelos símbolos `"."` e `"_"` (mas isso é opcional).
 
+## O que é um *nome válido* em `R`?
+
+Um nome válido no `R` é uma sequência de um ou mais caracteres tais que:
+
+1. o primeiro caracter pode ser uma letra ou o símbolo `"."` (ponto)
+1. o segundo caracter (se houver) pode ser uma letra, o símbolo `"."` (ponto) 
+ou o símbolo `"_"` (sublinhado)
+    - se o primeiro caracter não for `"."` (ponto), o segundo caracter também 
+    poderá ser um dígito
+1. do terceiro caracter em diante (se houver), ele pode ser letra, dígito ou os 
+símbolos `"."` e `"_"` 
+
+
+
+## O que é um *nome válido* em `R`?
+
+O `R` entende por *letra* tanto os caracteres latinos não acentuados (de 
+`"A"` a `"Z"` e de `"a"` a `"z"`) como 
+
+- caracteres latinos acentuados (como `"Á"`, `"ç"`, `"ä"`, `"ŷ"`, `"ñ"` 
+etc.), 
+- caracteres de alfabetos não latinos (como `"я"` do alfabeto cirílico, `"θ"` 
+do alfabeto grego, `"男"` do alfabeto chinês etc.)
+
+*Scripts* com esses caracteres terão problema de portabilidade: um *script* que 
+funciona na sua máquina pode não funcionar na máquina de outra pessoa.
+
+***Conselho***: por precaução, só use caracteres latinos não acentuados 
+(de `A` a `Z` e de `a` a `z`) e não use nomes como `男` em um *script*.
 
 
 ## Operadores de Atribuição
 
-- O `R` considera como diferentes a versão maiúscula e a versão minúscula das letras.
-    - Assim, `"X"` e `"x"` são nomes diferentes, da mesma forma como são nomes diferentes `"opção"`, `"Opção"`, `"OPÇÃO"` e `"OpÇãO"`.
-- Conselho: Apesar de ser possível, prefira não usar `"."` e nem `"_"` como 
-nomes.  
-    - Há diversos motivos para esse conselho.
+- O `R` considera como diferentes a versão maiúscula e a versão minúscula das 
+letras.
+    - Assim, `"X"` e `"x"` são nomes diferentes, da mesma forma como são nomes 
+    diferentes `"opção"`, `"Opção"`, `"OPÇÃO"` e `"OpÇãO"`.
+
+***Conselho***: Apesar de ser possível, prefira não usar `"."` como nome.
+
+- Há diversos motivos para esse conselho.
 
 
 
@@ -1633,15 +1661,33 @@ nomes.
 
 Exemplos de nomes válidos:
 
-- `x`, `y`, `x1`, `x.1`, `x_1`, `x2.3_a.z`, 
-- `compensação`, `é`, `.1a.escolha`
+- `x`, `y`, `x1`, `x.1`, `x_1`, `x2.3_a.z`
+- `compensação`, `é`
 - `opçãomenu`, `opção.menu`, `opçãoMenu`
 
 Exemplos de nómes inválidos:
 
-- `2a.escolha` -- começa por um dígito
+- `1a.escolha` -- começa por um dígito
+- `.2a.escolha` -- começa por ponto seguido de dígito
+- `_3a.escolha` -- começa por sublinhado
 - `1L` -- na verdade, é um número inteiro
 - `opção-2` -- o `R` compreende como a diferença entre `opção` e 2
+
+
+
+## Operadores de Atribuição
+
+Exemplos de nomes válidos **escrotos**:
+
+- `x2.3_a.z`
+- `.__...____....._____.......`
+
+***Conselho***: Não use nomes escrotos assim; imagine este código:
+
+```{r, eval=FALSE}
+._ + .._.. ^ ._.._... * ._._(...._, ......._)
+```
+
 
 
 ## Operadores de Atribuição
@@ -1658,9 +1704,7 @@ x == y
 
 ## Operadores de Atribuição
 
-Como já vimos, o operador `<-` associa um objeto do R a um nome.
-
-Mas há também o operador `->`
+Além do operador `<-`, há também o operador `->`
 
 ```{r 12}
 ```
@@ -3318,7 +3362,9 @@ Porque não executou código nenhum.
 
 ## Instruções `if` e `else`
 
-As instruções `if` e `else` usadas em conjunto permitem executar ou um trecho de código se a condição for verdadeira ou outro trecho de código se a condição for falsa
+As instruções `if` e `else` usadas em conjunto permitem executar ou um trecho 
+de código se a condição for verdadeira ou outro trecho de código se a condição 
+for falsa.
 
 A sintaxe da instrução `if` é
 
@@ -3326,7 +3372,7 @@ A sintaxe da instrução `if` é
 if (condição) expressão1 else expressão2
 ```
 
-Se houver mais de a expressão, use `{}`
+Se houver mais de uma expressão, use `{}`
 
 ```{r, eval=FALSE}
 if (condição) {expressão; ...; expressão} else {expressão; ...; expressão} 
@@ -3339,8 +3385,8 @@ if (condição) {expressão; ...; expressão} else {expressão; ...; expressão}
 Claro, quebrar a instrução em mais de uma linha geralmente aumenta a 
 legibilidade do seu código.
 
-Contudo há um **grande** restrição no uso da instrução `else` em uma linha diferente 
-da linha da instrução `if`.
+Contudo há um **grande** restrição no uso da instrução `else` em uma linha 
+diferente da linha da instrução `if`.
 
 **ATENÇÃO**: Isso pode fazer o seu *script* dar um pau do qual você dificilmente 
 desconfiará.
@@ -3525,7 +3571,7 @@ y
 
 ## Instruções `if` e `else`
 
-Na verdade mesmo, dá para fazer até mesmo isto:
+Na verdade, dá para fazer até mesmo isto:
 
 ```{r}
 x <- (if (T) 2)
